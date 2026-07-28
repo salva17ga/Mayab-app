@@ -1,0 +1,11 @@
+# virtual env
+venv/ 
+
+# python 
+__pycache__/
+
+# SQLite
+db.sqlite3
+
+# Compiled Migrations 
+*.pyc
