@@ -3,9 +3,14 @@ venv/
 
 # python 
 __pycache__/
+*.py[cod]
+*$py.class
 
 # SQLite
 db.sqlite3
 
 # Compiled Migrations 
 *.pyc
+
+# Environment variables
+.env
