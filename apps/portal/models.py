@@ -75,7 +75,7 @@ class Producto(models.Model):
                                      default=True,
                                      help_text="Disponible")
     Fecha_registro = models.DateField(auto_now_add=True,
-                                      verbose_name="Fecha de registro del usuario" 
+                                      verbose_name="Fecha de registro del usuario",
                                       help_text="Fecha de registro del usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
     
@@ -85,7 +85,7 @@ class Producto(models.Model):
     def __str__(self):
         return self.Nombre
 
-class Exhibicion(models.Models): 
+class Exhibicion(models.Model): 
     """Datos asociados a exhiciones realizadas en mayab"""
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre de la exhibición", 
@@ -94,14 +94,13 @@ class Exhibicion(models.Models):
                                    help_text="Descripción de la exhibición",
                                    blank=True,
                                    null=True)
-    Fecha_exhibicion = models.DateField(verbose_name="Fecha de la exhibición" 
+    Fecha_exhibicion = models.DateField(verbose_name="Fecha de la exhibición",
                                       help_text="Fecha de la exhibición")
     Fecha_registro = models.DateField(auto_now_add=True,
-                                      verbose_name="Fecha de registro" 
+                                      verbose_name="Fecha de registro",
                                       help_text="Fecha de registro")
     ### relations
-    Creado_por = Usuario_id 
-    # fotos
+
     def __str__(self):
             return self.Nombre
 
