@@ -110,8 +110,8 @@ def ruta_foto(instance, filename):
     Auxiliar function to save the image where it corresponds, in the Productos folder
     or in the Exhibitions folder. 
     '''
-    if instance.producto:
-        return f"productos/{instance.producto.id}/{filename}"
+    if instance.Producto:
+        return f"productos/{instance.Producto.id}/{filename}"
     return f"exhibiciones/{instance.exhibicion.id}/{filename}"
 
 
