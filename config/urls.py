@@ -15,10 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include 
 import apps.portal.views
 
+# TODO: use include() to group all admins funcionality (login and CRUD) on a new app 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', apps.portal.views.index)
+    path('', apps.portal.views.index, name = 'index'), 
+    path('about', apps.portal.views.about, name = 'about'), 
+    path('furnitures', apps.portal.views.furnitures, name = 'furnitures'), 
+    path('art', apps.portal.views.art, name = 'art'), 
+    path('decoration', apps.portal.views.decoration, name = 'decoration'), 
+    path('exhibitions', apps.portal.views.exhibitions, name = 'exhibitions')
 ]
