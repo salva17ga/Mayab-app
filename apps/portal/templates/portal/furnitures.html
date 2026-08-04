@@ -1,0 +1,29 @@
+{% extends "portal/base.html" %}
+
+{% block title %} Muebles {% endblock %}
+
+{% block content %}
+
+<h1>Página de muebles </h1>
+
+<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel
+    voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis,
+    harum aliquid.
+</p>
+
+{% if furnitures %}
+
+<ol>
+    {% for furniture in furnitures %}
+    <li>
+        {{furniture.Nombre}}
+    </li> 
+    {% endfor %}
+</ol>
+
+{% else %}
+
+<p>No hay muebles</p>
+
+{% endif %}
+{% endblock %}
