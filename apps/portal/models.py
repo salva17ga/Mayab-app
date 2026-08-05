@@ -75,8 +75,8 @@ class Producto(models.Model):
                                      default=True,
                                      help_text="Disponible")
     Fecha_registro = models.DateField(auto_now_add=True,
-                                      verbose_name="Fecha de registro del usuario",
-                                      help_text="Fecha de registro del usuario")
+                                      verbose_name="Fecha de registro por usuario",
+                                      help_text="Fecha de registro por usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
     
     ### relations
