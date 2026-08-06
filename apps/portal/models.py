@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -75,8 +76,8 @@ class Producto(models.Model):
                                      default=True,
                                      help_text="Disponible")
     Fecha_registro = models.DateField(auto_now_add=True,
-                                      verbose_name="Fecha de registro del usuario",
-                                      help_text="Fecha de registro del usuario")
+                                      verbose_name="Fecha de registro por usuario",
+                                      help_text="Fecha de registro por usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
     
     ### relations
@@ -110,9 +111,9 @@ def ruta_foto(instance, filename):
     Auxiliar function to save the image where it corresponds, in the Productos folder
     or in the Exhibitions folder. 
     '''
-    if instance.Producto:
+    if instance.Producto: ### TODO : UPDATE RIGHT FOLDER FOR UPLOAD MEDIA
         return f"productos/{instance.Producto.id}/{filename}"
-    return f"exhibiciones/{instance.exhibicion.id}/{filename}"
+    return f"exhibiciones/{instance.Exhibicion.id}/{filename}"
 
 
 class Foto(models.Model): 
@@ -120,8 +121,8 @@ class Foto(models.Model):
 
     Imagen = models.ImageField(upload_to=ruta_foto)
     Fecha_carga = models.DateField(auto_now_add=True,
-                                      verbose_name="Fecha de la exhibición",
-                                      help_text="Fecha de la exhibición")
+                                      verbose_name="Fecha de carga de imagen",
+                                      help_text="Fecha de carga de imagen")
 
     ### relations
     Producto = models.ForeignKey(Producto, 
@@ -135,6 +136,10 @@ class Foto(models.Model):
                                     blank=True,
                                     related_name="fotos")
 
+    def clean(self):
+        super().clean()
+        if bool(self.Producto) == bool(self.Exhibicion):
+            raise ValidationError("Seleccione únicamente un producto o una exhibición.")
          
     def __str__(self):
             return self.Imagen.name
