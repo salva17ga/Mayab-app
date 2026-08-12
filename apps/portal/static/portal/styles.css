@@ -1,0 +1,93 @@
+
+
+/*  ############################ base.html #################################### */
+
+/* BARRA DE NAVEGACION */
+
+/* Colores Mayab */
+:root {
+  --mayab-blue: #3E4963;      /* RGB(62, 73, 99) */
+  --mayab-gold: #CFAD71;      /* RGB(207, 173, 113) */
+  --mayab-dark: #1C2027;      /* RGB(28, 32, 39) */
+  --mayab-white: #F8F7F6;
+}
+
+/* Navbar estilo Mayab */
+.navbar {
+  background-color: var(--mayab-blue) !important;
+  padding: 0.8rem 1.2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+/* Marca (logo / nombre) */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--mayab-gold) !important;
+  letter-spacing: 1px;
+}
+
+/* Links */
+.navbar-nav .nav-link {
+  color: var(--mayab-white) !important;
+  margin: 0 0.4rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Hover elegante */
+.navbar-nav .nav-link:hover {
+  color: var(--mayab-gold) !important;
+  transform: translateY(-2px);
+}
+
+/* Estado activo */
+.navbar-nav .nav-link.active {
+  color: var(--mayab-gold) !important;
+  border-bottom: 2px solid var(--mayab-gold);
+}
+
+/* Botón hamburguesa */
+.navbar-toggler {
+  border-color: var(--mayab-gold) !important;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) saturate(100%) invert(89%) sepia(61%) saturate(703%)
+          hue-rotate(336deg) brightness(88%) contrast(92%);
+}
+
+/* FOOTER */
+
+footer{
+    background-color: var(--mayab-gold);
+    display: flex;
+    justify-content: space-evenly; /* separa los elementos */
+    align-items: center;
+    gap: 1rem; /* espacio entre ellos */
+    align-items: center;
+    text-align: center;
+
+}
+
+/* #elementos_footer {
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center;
+    gap: 1rem; 
+} */
+
+@media (max-width: 480px) {
+    footer {
+
+        display: block;
+
+    }
+}
+
+.footer-element{
+    display: block;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    padding: 0.5rem;
+}

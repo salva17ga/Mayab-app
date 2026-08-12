@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 import apps.portal.views
 
+
 # TODO: use include() to group all admins funcionality (login and CRUD) on a new app 
 urlpatterns = [
     path('admin/', admin.site.urls),
