@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import apps.portal.views
-
+from django.conf import settings 
+from django.conf.urls.static import static
 
 # TODO: use include() to group all admins funcionality (login and CRUD) on a new app 
 urlpatterns = [
@@ -29,3 +30,8 @@ urlpatterns = [
     path('decoration', apps.portal.views.decoration, name = 'decoration'), 
     path('exhibitions', apps.portal.views.exhibitions, name = 'exhibitions')
 ]
+
+if settings.DEBUG: 
+    urlpatterns += static(settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT)
+
