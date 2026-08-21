@@ -136,6 +136,8 @@ class Foto(models.Model):
                                     blank=True,
                                     related_name="fotos")
 
+    ## subido por quien? TODO 
+
     def clean(self):
         super().clean()
         if bool(self.Producto) == bool(self.Exhibicion):

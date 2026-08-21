@@ -1,13 +1,24 @@
-
 {% extends "base.html" %}
 
-{% block title %} Decoracion {% endblock %}
+{% block title %} Decoración {% endblock %}
 
 {% block content %}
 
-<h1>Página de decoracion </h1>
+<h1>Decoración con gusto mayab</h1>
 
-<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
+<p> texto bonito de accesorios de decoración. 
+    <br>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
 </p>
 
+<hr>
+
+{% if productos %}
+
+    {% include "portal/catalogo.html" %}
+
+{% else %}
+    <p>No hay productos disponibles por el momento</p>
+
+{% endif %}
 {% endblock %}
