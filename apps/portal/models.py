@@ -111,7 +111,7 @@ def ruta_foto(instance, filename):
     Auxiliar function to save the image where it corresponds, in the Productos folder
     or in the Exhibitions folder. 
     '''
-    if instance.Producto: ### TODO : UPDATE RIGHT FOLDER FOR UPLOAD MEDIA
+    if instance.Producto: 
         return f"productos/{instance.Producto.id}/{filename}"
     return f"exhibiciones/{instance.Exhibicion.id}/{filename}"
 
@@ -137,6 +137,7 @@ class Foto(models.Model):
                                     related_name="fotos")
 
     ## subido por quien? TODO 
+    ### TODO: eliminar archivo de imagen tras eliminar un registro (revisar señales pre o post delete)
 
     def clean(self):
         super().clean()
