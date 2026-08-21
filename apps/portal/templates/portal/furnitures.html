@@ -4,26 +4,21 @@
 
 {% block content %}
 
-<h1>Página de muebles </h1>
+<h1>Muebles finos de autor selección mayab</h1>
 
-<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel
-    voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis,
-    harum aliquid.
+<p> texto bonito de muebles. 
+    <br>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
 </p>
 
-{% if furnitures %}
+<hr>
 
-<ol>
-    {% for furniture in furnitures %}
-    <li>
-        {{furniture.Nombre}}
-    </li> 
-    {% endfor %}
-</ol>
+{% if productos %}
+
+    {% include "portal/catalogo.html" %}
 
 {% else %}
-
-<p>No hay muebles</p>
+    <p>No hay muebles disponibles por el momento</p>
 
 {% endif %}
 {% endblock %}

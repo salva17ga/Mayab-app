@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Producto
+from .models import Producto, Exhibicion
 
 ### views
 
@@ -19,26 +19,41 @@ def furnitures(request):
     '''
     display furniture's catalog
     '''
-    furnitures = Producto.objects.filter(Categoria = 'Mueble').all()
+    
+    productos = Producto.objects.filter(Categoria = 'Mueble').all()
 
-    return render(request, "portal/furnitures.html", {furnitures:furnitures})
+    return render(request,
+                   "portal/furnitures.html",
+                   {"productos":productos})
 
 def art(request): 
     '''
     display art catalog
     '''
-    return render(request, "portal/art.html")
+    productos = Producto.objects.filter(Categoria = 'Arte').all()
+    
+    return render(request,
+                       "portal/art.html",
+                       {"productos":productos})
 
 def decoration(request): 
     '''
     display decoration items catalog
     '''
-    return render(request, "portal/decoration.html")
+    productos = Producto.objects.filter(Categoria = 'Accesorio_decoracion').all()
+    
+    return render(request,
+                       "portal/decoration.html",
+                       {"productos":productos})
 
 def exhibitions(request): 
     '''
     display exhibitions registered 
     '''
-    return render(request, "portal/exhibitions.html")
+    exhibiciones = Exhibicion.objects.all()
+
+    return render(request,
+                   "portal/exhibitions.html",
+                   {"exhibiciones": exhibiciones})
 
 ### TODO: error handling routes 
