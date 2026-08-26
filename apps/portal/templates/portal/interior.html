@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+
+{% block title %} Interiorismo {% endblock %}
+
+{% block content %}
+
+<h1>Interiorismo realizado por nosotros</h1>
+
+<p> 
+    texto sobre mayab como espacio para exhibiciones. <br>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
+</p>
+
+<hr>
+
+{% if interiores %}
+    
+    {% for interior in interiores %}
+
+        <ol>Diseño de interior: {{interior.Nombre}}</ol>
+
+    {% endfor %}
+
+{% else %}
+    <p>Sin fotos de interiorismo aún</p>
+{% endif %}
+
+{% endblock %}

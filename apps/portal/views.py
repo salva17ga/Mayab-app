@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Producto, Exhibicion
+from apps.portal.models import Mueble, Decoracion, Arte, Exhibicion, Interiorismo
 
 ### views
 
@@ -20,7 +20,7 @@ def furnitures(request):
     display furniture's catalog
     '''
     
-    productos = Producto.objects.filter(Categoria = 'Mueble').all()
+    productos = Mueble.objects.all()
 
     return render(request,
                    "portal/furnitures.html",
@@ -30,7 +30,7 @@ def art(request):
     '''
     display art catalog
     '''
-    productos = Producto.objects.filter(Categoria = 'Arte').all()
+    productos = Arte.objects.all()
     
     return render(request,
                        "portal/art.html",
@@ -40,7 +40,7 @@ def decoration(request):
     '''
     display decoration items catalog
     '''
-    productos = Producto.objects.filter(Categoria = 'Accesorio_decoracion').all()
+    productos = Decoracion.objects.all()
     
     return render(request,
                        "portal/decoration.html",
@@ -56,4 +56,13 @@ def exhibitions(request):
                    "portal/exhibitions.html",
                    {"exhibiciones": exhibiciones})
 
+def interior_design(request): 
+    '''
+    display interior design photos
+    '''
+    interiores = Interiorismo.objects.all()
+
+    return render(request, 
+                  "portal/interior.html",
+                  {"interiores" : interiores})
 ### TODO: error handling routes 
