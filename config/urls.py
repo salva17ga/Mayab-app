@@ -27,7 +27,8 @@ urlpatterns = [
     path('furnitures', apps.portal.views.furnitures, name = 'furnitures'), 
     path('art', apps.portal.views.art, name = 'art'), 
     path('decoration', apps.portal.views.decoration, name = 'decoration'), 
-    path('exhibitions', apps.portal.views.exhibitions, name = 'exhibitions')
+    path('exhibitions', apps.portal.views.exhibitions, name = 'exhibitions'), 
+    path('interior_design', apps.portal.views.interior_design, name = 'interior_design'), 
 ]
 
 if settings.DEBUG: 
