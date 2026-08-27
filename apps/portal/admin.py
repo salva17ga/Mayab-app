@@ -6,16 +6,23 @@ from django.utils.html import format_html
 class FotoInline(admin.StackedInline): 
     model = Foto
     extra = 0
+    exclude = ('Registrado_por', )
 
+    readonly_fields = ('show_photo',)
 
-    ### experimento: 
-    list_display = ('show_photo')
+    fields = (
+        'Imagen',
+        'show_photo',
+    )
+    @admin.display(description="Vista previa")
     def show_photo(self, obj):
-        if obj.Imagen: 
-            return format_html('<img src="{}" width="60">', obj.Imagen.url)
+        if obj.Imagen:
+            return format_html(
+                '<img src="{}" style="width:20rem; height: 20rem; '
+            'object-fit:cover; border-radius:0.5rem;">',
+                obj.Imagen.url
+            )
         return "-"
-
-
 
 
 class MuebleAdmin(admin.ModelAdmin): 
@@ -25,7 +32,6 @@ class MuebleAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
-
     inlines = (FotoInline, )
     exclude = ('Registrado_por', )
     
@@ -42,6 +48,7 @@ class DecoracionAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
+    inlines = (FotoInline, )
     exclude = ('Registrado_por', )
         
     def save_model(self, request, obj, form, change):
@@ -57,7 +64,7 @@ class ArteAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
-
+    inlines = (FotoInline, )
     exclude = ('Registrado_por', )
     
     def save_model(self, request, obj, form, change):
@@ -72,6 +79,7 @@ class ExhibicionAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_exhibicion"
     search_fields = ("Nombre",) 
     list_per_page = 10
+    inlines = (FotoInline, )
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -85,6 +93,7 @@ class InteriorismoAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre",) 
     list_per_page = 10
+    inlines = (FotoInline, )
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -123,7 +132,7 @@ class FotoAdmin(admin.ModelAdmin):
     @admin.display(description="Vista previa")
     def preview(self, obj): 
         if obj.Imagen: 
-            return format_html('<img src="{}" width="60">', obj.Imagen.url)
+            return format_html('<img src="{}" width="120rem ; height=120rem">', obj.Imagen.url)
         return "-"
 
 

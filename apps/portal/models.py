@@ -304,5 +304,7 @@ class Foto(models.Model):
             raise ValidationError("Seleccione únicamente un producto o una exhibición.")
          
     def __str__(self):
-            return self.Imagen.name
+        if self.Imagen:
+            return f"Foto de {self.Mueble} - {self.Imagen.name}"
+        return f"Foto de {self.Mueble} - Sin imagen"
 
