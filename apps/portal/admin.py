@@ -3,12 +3,26 @@ from django.contrib import admin
 from apps.portal.models import Mueble, Decoracion, Arte, Exhibicion, Interiorismo, Foto
 from django.utils.html import format_html
 
+class FotoInline(admin.StackedInline): 
+    model = Foto
+    extra = 0
+
+
+    ### experimento: 
+    list_display = ('show_photo')
+    def show_photo(self, obj):
+        if obj.Imagen: 
+            return format_html('<img src="{}" width="60">', obj.Imagen.url)
+        return "-"
+
 class MuebleAdmin(admin.ModelAdmin): 
     list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible", "Fecha_registro", "Fecha_actualizacion")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
+    inlines = (FotoInline, )
+
 
 class DecoracionAdmin(admin.ModelAdmin): 
     list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible", "Fecha_registro", "Fecha_actualizacion")
@@ -37,6 +51,7 @@ class InteriorismoAdmin(admin.ModelAdmin):
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre",) 
     list_per_page = 10
+    
 
 class FotoAdmin(admin.ModelAdmin): 
     list_display = ("preview","Imagen", "Fecha_carga", "image_type", "name_of_parent", "type_of_product")
