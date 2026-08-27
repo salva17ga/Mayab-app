@@ -15,28 +15,56 @@ class FotoInline(admin.StackedInline):
             return format_html('<img src="{}" width="60">', obj.Imagen.url)
         return "-"
 
+
+
+
 class MuebleAdmin(admin.ModelAdmin): 
-    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible", "Fecha_registro", "Fecha_actualizacion")
+    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
+                     "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
-    inlines = (FotoInline, )
 
+    inlines = (FotoInline, )
+    exclude = ('Registrado_por', )
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
+
+        super().save_model(request, obj, form, change)
 
 class DecoracionAdmin(admin.ModelAdmin): 
-    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible", "Fecha_registro", "Fecha_actualizacion")
+    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
+                     "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
+    list_filter = ("Categoria", "Disponible", "Fecha_registro")
+    date_hierarchy = "Fecha_registro"
+    search_fields = ("Nombre", "Autor")
+    list_per_page = 10
+    exclude = ('Registrado_por', )
+        
+    def save_model(self, request, obj, form, change):
+            if not change:
+                obj.Registrado_por = request.user
+    
+            super().save_model(request, obj, form, change)
+
+class ArteAdmin(admin.ModelAdmin): 
+    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
+                     "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre", "Autor")
     list_per_page = 10
 
-class ArteAdmin(admin.ModelAdmin): 
-    list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible", "Fecha_registro", "Fecha_actualizacion")
-    list_filter = ("Categoria", "Disponible", "Fecha_registro")
-    date_hierarchy = "Fecha_registro"
-    search_fields = ("Nombre", "Autor")
-    list_per_page = 10
+    exclude = ('Registrado_por', )
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
+
+        super().save_model(request, obj, form, change)
 
 class ExhibicionAdmin(admin.ModelAdmin): 
     list_display = ("Nombre", "Descripcion", "Fecha_exhibicion")
@@ -45,16 +73,29 @@ class ExhibicionAdmin(admin.ModelAdmin):
     search_fields = ("Nombre",) 
     list_per_page = 10
 
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
+
+        super().save_model(request, obj, form, change)
+
 class InteriorismoAdmin(admin.ModelAdmin): 
     list_display = ("Nombre", "Descripcion", "Fecha_registro")
     list_filter = ("Fecha_registro",)
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre",) 
     list_per_page = 10
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
+
+        super().save_model(request, obj, form, change)
     
 
 class FotoAdmin(admin.ModelAdmin): 
-    list_display = ("preview","Imagen", "Fecha_carga", "image_type", "name_of_parent", "type_of_product")
+    list_display = ("preview","Imagen", "Fecha_carga", "image_type", "name_of_parent",
+                     "type_of_product", "Registrado_por")
     fieldsets = (
         ("Archivo",
           {"fields": ("Imagen",)}), 
@@ -66,7 +107,13 @@ class FotoAdmin(admin.ModelAdmin):
     search_fields = ("Mueble__Nombre", "Decoracion__Nombre", "Arte__Nombre", "Exhibicion__Nombre", 
                      "Interiorismo__Nombre")
     list_per_page = 10
+    exclude = ('Registrado_por', )
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
 
+        super().save_model(request, obj, form, change)
     '''
         ####### TODO
         implementar list_select_related porque cada fila hace obj.Producto y obj.Exhibicion 
