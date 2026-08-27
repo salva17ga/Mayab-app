@@ -2,14 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-# Create your models here.
-
-#### modelos 
-# usuarios - productos (1 - n)
-# usuarios - exhibiciones (1 - n)
-# productos - fotos (1 - n)
-# exhibiciones - fotos (1 - n)
-
 # class Usuario(models.Model): 
 #     """Usuarios de mayab app que inician sesion"""
 
@@ -44,110 +36,6 @@ from django.contrib.auth.models import User
 #     # productos
 #     # exhibiciones
 
-# class Producto(models.Model): 
-#     """
-#     Datos asociados a cada producto registrado, pudiendo ser arte, mueble o accesorio 
-#     de decoracion. 
-#     """
-
-#     class Categorias_productos(models.TextChoices):
-#         """Categorías válidas para productos registrados en el atributo Categoria"""
-#         Mueble = "Mueble", "Mueble" 
-#         Arte = "Arte", "Arte"
-#         Accesorio_decoracion = "Accesorio_decoracion", "Accesorio de decoración"
-
-#     Nombre = models.CharField(max_length=100,
-#                               verbose_name="Nombre del producto", 
-#                               help_text="Nombre del producto",
-#                               unique=True)
-#     Descripcion = models.TextField(verbose_name="Descripción del producto",
-#                                    help_text="Descripción del producto",
-#                                    blank=True,
-#                                    null=True)
-#     Categoria = models.CharField(max_length=50,
-#                                  verbose_name="Categoría de producto",
-#                                  help_text="Categoría de producto",
-#                                  choices=Categorias_productos.choices)
-#     Autor = models.CharField(max_length=100,
-#                              help_text="Autor o fabricante del producto")
-#     Precio = models.DecimalField(max_digits=8,
-#                                  decimal_places=2,
-#                                  help_text="Precio del producto")
-#     Disponible = models.BooleanField(blank=True,
-#                                      default=True,
-#                                      help_text="Disponible")
-#     Fecha_registro = models.DateField(auto_now_add=True,
-#                                       verbose_name="Fecha de registro por usuario",
-#                                       help_text="Fecha de registro por usuario")
-#     Fecha_actualizacion = models.DateTimeField(auto_now=True)
-    
-#     ### relations
-#     # Registrado_por = 
-
-#     def __str__(self):
-#         return self.Nombre
-
-# class Exhibicion(models.Model): 
-#     """Datos asociados a exhiciones realizadas en mayab"""
-#     Nombre = models.CharField(max_length=100,
-#                               verbose_name="Nombre de la exhibición", 
-#                               help_text="Nombre de la exhibición")
-#     Descripcion = models.TextField(verbose_name="Descripción de la exhibición",
-#                                    help_text="Descripción de la exhibición",
-#                                    blank=True,
-#                                    null=True)
-#     Fecha_exhibicion = models.DateField(verbose_name="Fecha de la exhibición",
-#                                       help_text="Fecha de la exhibición")
-#     Fecha_registro = models.DateField(auto_now_add=True,
-#                                       verbose_name="Fecha de registro",
-#                                       help_text="Fecha de registro")
-
-#     def __str__(self):
-#             return self.Nombre
-
-    
-# def ruta_foto(instance, filename):
-#     '''
-#     Auxiliar function to save the image where it corresponds, in the Productos folder
-#     or in the Exhibitions folder. 
-#     '''
-#     if instance.Producto: 
-#         return f"productos/{instance.Producto.id}/{filename}"
-#     return f"exhibiciones/{instance.Exhibicion.id}/{filename}"
-
-
-# class Foto(models.Model): 
-#     """Datos asociados a imagenes cargadas en el sistema ya sea de exhibiciones o de productos"""
-
-#     Imagen = models.ImageField(upload_to=ruta_foto)
-#     Fecha_carga = models.DateField(auto_now_add=True,
-#                                       verbose_name="Fecha de carga de imagen",
-#                                       help_text="Fecha de carga de imagen")
-
-#     ### relations
-#     Producto = models.ForeignKey(Producto, 
-#                                     on_delete = models.CASCADE,
-#                                     null=True,
-#                                     blank=True,
-#                                     related_name="fotos")
-#     Exhibicion  = models.ForeignKey(Exhibicion, 
-#                                     on_delete = models.CASCADE,
-#                                     null=True,
-#                                     blank=True,
-#                                     related_name="fotos")
-
-#     ## subido por quien? TODO 
-#     ### TODO: eliminar archivo de imagen tras eliminar un registro (revisar señales pre o post delete)
-
-#     def clean(self):
-#         super().clean()
-#         if bool(self.Producto) == bool(self.Exhibicion):
-#             raise ValidationError("Seleccione únicamente un producto o una exhibición.")
-         
-#     def __str__(self):
-#             return self.Imagen.name
-
-#################################################################################################################
 #### relaciones de modelos 
 # usuarios - muebles (1 - n)
 # usuarios - arte (1 - n)
@@ -160,6 +48,10 @@ from django.contrib.auth.models import User
 # decoracion - fotos (1 -n)
 # interiorismo - fotos (1 -n)
 # exhibiciones - fotos (1 - n)
+
+## TODO: el campo registrado_por deberia llenarse en automatico con el .id del user en sesion, 
+# no dar un select para elegirlo
+
 
 class Mueble(models.Model): 
     """
@@ -181,19 +73,19 @@ class Mueble(models.Model):
         Escritorio = 'escritorio', 'Escritorios'
 
     Nombre = models.CharField(max_length=100,
-                              verbose_name="Nombre del producto", 
-                              help_text="Nombre del producto",
+                              verbose_name="Nombre del mueble", 
+                              help_text="Nombre del mueble",
                               unique=True)
-    Descripcion = models.TextField(verbose_name="Descripción del producto",
-                                   help_text="Descripción del producto",
+    Descripcion = models.TextField(verbose_name="Descripción del mueble",
+                                   help_text="Descripción del mueble",
                                    blank=True,
                                    null=True)
     Categoria = models.CharField(max_length=50,
-                                 verbose_name="Categoría de producto",
-                                 help_text="Categoría de producto",
+                                 verbose_name="Categoría de mueble",
+                                 help_text="Categoría de mueble",
                                  choices=CategoriasMuebles.choices)
     Autor = models.CharField(max_length=100,
-                             help_text="Autor o fabricante del producto")
+                             help_text="Autor o fabricante del mueble")
     Precio = models.DecimalField(max_digits=8,
                                  decimal_places=2,
                                  help_text="Precio del producto")
@@ -232,19 +124,19 @@ class Decoracion(models.Model):
         Madera_tallada = 'madera_tallada', 'Madera tallada (ebanistería)'
 
     Nombre = models.CharField(max_length=100,
-                              verbose_name="Nombre del producto", 
-                              help_text="Nombre del producto",
+                              verbose_name="Nombre del accesorio", 
+                              help_text="Nombre del accesorio",
                               unique=True)
-    Descripcion = models.TextField(verbose_name="Descripción del producto",
-                                   help_text="Descripción del producto",
+    Descripcion = models.TextField(verbose_name="Descripción del accesorio",
+                                   help_text="Descripción del accesorio",
                                    blank=True,
                                    null=True)
     Categoria = models.CharField(max_length=50,
-                                 verbose_name="Categoría de producto",
-                                 help_text="Categoría de producto",
+                                 verbose_name="Categoría de accesorio",
+                                 help_text="Categoría de accesorio",
                                  choices=CategoriasDecoracion.choices)
     Autor = models.CharField(max_length=100,
-                             help_text="Autor o fabricante del producto")
+                             help_text="Autor o fabricante del accesorio")
     Precio = models.DecimalField(max_digits=8,
                                  decimal_places=2,
                                  help_text="Precio del producto")
@@ -287,8 +179,8 @@ class Arte(models.Model):
                                    blank=True,
                                    null=True)
     Categoria = models.CharField(max_length=50,
-                                 verbose_name="Categoría de producto",
-                                 help_text="Categoría de producto",
+                                 verbose_name="Categoría de arte",
+                                 help_text="Categoría de arte",
                                  choices=CategoriasArte.choices)
     Autor = models.CharField(max_length=100,
                              help_text="Autor o fabricante del producto")
@@ -420,7 +312,4 @@ class Foto(models.Model):
          
     def __str__(self):
             return self.Imagen.name
-
-
-
 

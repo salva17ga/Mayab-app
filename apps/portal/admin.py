@@ -44,7 +44,7 @@ class FotoAdmin(admin.ModelAdmin):
         ("Archivo",
           {"fields": ("Imagen",)}), 
         ("Pertenencia de la imagen (Seleccionar solo al que corresponda)", 
-         {"fields": ("Mueble", "Decoracion, Arte, Exhibicion, Interiorismo")})
+         {"fields": ("Mueble", "Decoracion", "Arte", "Exhibicion", "Interiorismo")})
     )
     list_filter = ("Fecha_carga","Exhibicion", "Mueble__Categoria", "Decoracion__Categoria", 
                    "Arte__Categoria", "Interiorismo")    
@@ -98,8 +98,14 @@ class FotoAdmin(admin.ModelAdmin):
         if the parent object is art, mueble or decoracion , returns
         the category of the product
         """
-        if obj.Mueble or obj.Decoracion or obj.Arte: 
-            type_of_product = obj.Mueble.Categoria or obj.Decoracion.Categoria or obj.Arte.Categoria
+        if obj.Mueble: 
+            type_of_product = obj.Mueble.Categoria 
+            return type_of_product
+        if obj.Decoracion: 
+            type_of_product = obj.Decoracion.Categoria
+            return type_of_product
+        if obj.Arte: 
+            type_of_product = obj.Arte.Categoria
             return type_of_product
         else: 
             return None
