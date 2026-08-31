@@ -3,7 +3,15 @@ from django.contrib import admin
 from apps.portal.models import Mueble, Decoracion, Arte, Exhibicion, Interiorismo, Foto
 from django.utils.html import format_html
 
+
+##### TODO: 
+# cuando creas un objeto de estos, su imagen asociada desde el formulario no 
+# guarda nada en 'registrado_por' 
+
+
+
 class FotoInline(admin.StackedInline): 
+    
     model = Foto
     extra = 0
     exclude = ('Registrado_por', )
@@ -14,6 +22,8 @@ class FotoInline(admin.StackedInline):
         'Imagen',
         'show_photo',
     )
+
+
     @admin.display(description="Vista previa")
     def show_photo(self, obj):
         if obj.Imagen:
@@ -109,7 +119,7 @@ class FotoAdmin(admin.ModelAdmin):
         ("Archivo",
           {"fields": ("Imagen",)}), 
         ("Pertenencia de la imagen (Seleccionar solo al que corresponda)", 
-         {"fields": ("Mueble", "Decoracion", "Arte", "Exhibicion", "Interiorismo")})
+         {"fields": ("Mueble", "Decoracion", "Arte", "Exhibicion", "Interiorismo")}),
     )
     list_filter = ("Fecha_carga","Exhibicion", "Mueble__Categoria", "Decoracion__Categoria", 
                    "Arte__Categoria", "Interiorismo")    
@@ -117,22 +127,57 @@ class FotoAdmin(admin.ModelAdmin):
                      "Interiorismo__Nombre")
     list_per_page = 10
     exclude = ('Registrado_por', )
+    readonly_fields = ('preview',)
     
     def save_model(self, request, obj, form, change):
         if not change:
             obj.Registrado_por = request.user
 
         super().save_model(request, obj, form, change)
-    '''
-        ####### TODO
-        implementar list_select_related porque cada fila hace obj.Producto y obj.Exhibicion 
-        o sobrescribir get_queryset()
-    '''
+
+    def get_fieldsets(self, request, obj=None):
+        '''
+        if page and form for edit photo (register), display a preview of the existing photo,
+        this ensures creating a new photo (add photo) does not show an empty field for preview
+        '''
+        if obj:
+            return (
+                (
+                    "Archivo",
+                    {
+                        "fields": ("Imagen",)
+                    }
+                ),
+                (
+                    "Pertenencia de la imagen (Seleccionar solo al que corresponda)",
+                    {
+                        "fields": (
+                            "Mueble",
+                            "Decoracion",
+                            "Arte",
+                            "Exhibicion",
+                            "Interiorismo",
+                        )
+                    },
+                ),
+                (
+                    "Vista previa de la foto",
+                    {
+                        "fields": ("preview",)
+                    }
+                ),
+            )
+
+        # Creando una Foto nueva
+        return self.fieldsets
+
 
     @admin.display(description="Vista previa")
     def preview(self, obj): 
         if obj.Imagen: 
-            return format_html('<img src="{}" width="120rem ; height=120rem">', obj.Imagen.url)
+            return format_html(
+                '<img src="{}" style="width:120px; height:120px; object-fit:contain;">',
+                obj.Imagen.url)
         return "-"
 
 
