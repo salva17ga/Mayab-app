@@ -3,14 +3,45 @@ from django.contrib import admin
 from apps.portal.models import Mueble, Decoracion, Arte, Exhibicion, Interiorismo, Foto
 from django.utils.html import format_html
 
+##### First aux models, then practical used models: 
+### Aux models: 
+# aux model
+class BaseProductAdmin(admin.ModelAdmin):
+    '''
+    This class inherits from ModelAdmin and defines basic methods that
+    are used for all the main models that inherit from this class 
+    '''
 
-##### TODO: 
-# cuando creas un objeto de estos, su imagen asociada desde el formulario no 
-# guarda nada en 'registrado_por' 
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.Registrado_por = request.user
 
+        super().save_model(request, obj, form, change)
 
+    def save_formset(self, request, form, formset, change):
+        '''
+        allows the field 'Registrado_por' to be filled when creating a new
+        register of a product and saving a first image in that form using the 
+        inline approach. This results in that first image saved with their 
+        corresponding register having a 'Registrado_por' valid input.  
+        '''
+        instances = formset.save(commit=False)
 
+        for obj in instances:
+            if not obj.Registrado_por:
+                obj.Registrado_por = request.user
+
+            obj.save()
+
+        formset.save_m2m()
+
+# aux model: 
 class FotoInline(admin.StackedInline): 
+    '''
+    this inline is used in all the following product and 
+    exhibitions or decorations models to allow save a photo
+    in their corresponding form
+    '''
     
     model = Foto
     extra = 0
@@ -34,8 +65,9 @@ class FotoInline(admin.StackedInline):
             )
         return "-"
 
+### Practical models: 
 
-class MuebleAdmin(admin.ModelAdmin): 
+class MuebleAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
                      "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
@@ -45,13 +77,7 @@ class MuebleAdmin(admin.ModelAdmin):
     inlines = (FotoInline, )
     exclude = ('Registrado_por', )
     
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.Registrado_por = request.user
-
-        super().save_model(request, obj, form, change)
-
-class DecoracionAdmin(admin.ModelAdmin): 
+class DecoracionAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
                      "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
@@ -61,13 +87,7 @@ class DecoracionAdmin(admin.ModelAdmin):
     inlines = (FotoInline, )
     exclude = ('Registrado_por', )
         
-    def save_model(self, request, obj, form, change):
-            if not change:
-                obj.Registrado_por = request.user
-    
-            super().save_model(request, obj, form, change)
-
-class ArteAdmin(admin.ModelAdmin): 
+class ArteAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Categoria", "Autor", "Precio", "Disponible",
                      "Fecha_registro", "Fecha_actualizacion", "Registrado_por")
     list_filter = ("Categoria", "Disponible", "Fecha_registro")
@@ -77,13 +97,7 @@ class ArteAdmin(admin.ModelAdmin):
     inlines = (FotoInline, )
     exclude = ('Registrado_por', )
     
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.Registrado_por = request.user
-
-        super().save_model(request, obj, form, change)
-
-class ExhibicionAdmin(admin.ModelAdmin): 
+class ExhibicionAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Descripcion", "Fecha_exhibicion")
     list_filter = ("Fecha_exhibicion",)
     date_hierarchy = "Fecha_exhibicion"
@@ -91,26 +105,13 @@ class ExhibicionAdmin(admin.ModelAdmin):
     list_per_page = 10
     inlines = (FotoInline, )
 
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.Registrado_por = request.user
-
-        super().save_model(request, obj, form, change)
-
-class InteriorismoAdmin(admin.ModelAdmin): 
+class InteriorismoAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Descripcion", "Fecha_registro")
     list_filter = ("Fecha_registro",)
     date_hierarchy = "Fecha_registro"
     search_fields = ("Nombre",) 
     list_per_page = 10
     inlines = (FotoInline, )
-
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.Registrado_por = request.user
-
-        super().save_model(request, obj, form, change)
-    
 
 class FotoAdmin(admin.ModelAdmin): 
     list_display = ("preview","Imagen", "Fecha_carga", "image_type", "name_of_parent",
@@ -128,12 +129,6 @@ class FotoAdmin(admin.ModelAdmin):
     list_per_page = 10
     exclude = ('Registrado_por', )
     readonly_fields = ('preview',)
-    
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.Registrado_por = request.user
-
-        super().save_model(request, obj, form, change)
 
     def get_fieldsets(self, request, obj=None):
         '''
