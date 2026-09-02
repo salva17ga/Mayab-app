@@ -171,7 +171,7 @@ class FotoAdmin(admin.ModelAdmin):
     def preview(self, obj): 
         if obj.Imagen: 
             return format_html(
-                '<img src="{}" style="width:120px; height:120px; object-fit:contain;">',
+                '<img src="{}" style="width:10rem; height:10rem; object-fit:contain;">',
                 obj.Imagen.url)
         return "-"
 
