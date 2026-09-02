@@ -49,8 +49,6 @@ from django.contrib.auth.models import User
 # interiorismo - fotos (1 -n)
 # exhibiciones - fotos (1 - n)
 
-## TODO: el campo registrado_por deberia llenarse en automatico con el .id del user en sesion, 
-# no dar un select para elegirlo
 
 
 class Mueble(models.Model): 
@@ -96,7 +94,7 @@ class Mueble(models.Model):
                                       verbose_name="Fecha de registro por usuario",
                                       help_text="Fecha de registro por usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
                                             on_delete=models.SET_NULL,
                                             null=True,
                                             blank=True,
@@ -147,10 +145,9 @@ class Decoracion(models.Model):
                                       verbose_name="Fecha de registro por usuario",
                                       help_text="Fecha de registro por usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
                                             on_delete=models.SET_NULL,
                                             null=True,
-                                            blank=True,
                                             related_name='articulos_decoracion_registrados')
 
 
@@ -194,10 +191,9 @@ class Arte(models.Model):
                                       verbose_name="Fecha de registro por usuario",
                                       help_text="Fecha de registro por usuario")
     Fecha_actualizacion = models.DateTimeField(auto_now=True)
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
                                             on_delete=models.SET_NULL,
                                             null=True,
-                                            blank=True,
                                             related_name='arte_registrado')
     def __str__(self):
         return self.Nombre
@@ -217,10 +213,9 @@ class Exhibicion(models.Model):
     Fecha_registro = models.DateField(auto_now_add=True,
                                       verbose_name="Fecha de registro",
                                       help_text="Fecha de registro")
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
                                             on_delete=models.SET_NULL,
                                             null=True,
-                                            blank=True,
                                             related_name='exhibiciones_registradas')
 
     def __str__(self):
@@ -238,10 +233,9 @@ class Interiorismo(models.Model):
     Fecha_registro = models.DateField(auto_now_add=True,
                                           verbose_name="Fecha de registro",
                                           help_text="Fecha de registro")
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
                                             on_delete=models.SET_NULL,
                                             null=True,
-                                            blank=True,
                                             related_name='interiorismo_registrado')
     
 
@@ -297,10 +291,9 @@ class Foto(models.Model):
                                     blank=True,
                                     related_name="fotos")
 
-    registrado_por = models.ForeignKey(User,
+    Registrado_por = models.ForeignKey(User,
+                                                null = True,
                                                 on_delete=models.SET_NULL,
-                                                null=True,
-                                                blank=True,
                                                 related_name='fotos_registradas')
     
     def clean(self):
@@ -311,5 +304,7 @@ class Foto(models.Model):
             raise ValidationError("Seleccione únicamente un producto o una exhibición.")
          
     def __str__(self):
-            return self.Imagen.name
+        if self.Imagen:
+            return f"Foto de {self.Mueble} - {self.Imagen.name}"
+        return f"Foto de {self.Mueble} - Sin imagen"
 

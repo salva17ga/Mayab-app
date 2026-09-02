@@ -17,3 +17,6 @@ db.sqlite3
 
 # planeacion interna
 plan.txt
+
+# media files (saved by users)
+media/
