@@ -204,8 +204,8 @@ class Exhibicion(models.Model):
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre de la exhibición", 
                               help_text="Nombre de la exhibición")
-    #Autor = models.CharField(max_length=100,
-    #                             help_text="Autor de la obra exhibida")
+    Autor = models.CharField(max_length=100,
+                                 help_text="Autor de la obra exhibida")
     Descripcion = models.TextField(verbose_name="Descripción de la exhibición",
                                    help_text="Descripción de la exhibición",
                                    blank=True,

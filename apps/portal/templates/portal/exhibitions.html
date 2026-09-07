@@ -20,8 +20,9 @@
         </p>
 
         <br>
-
-        {% if exhibiciones %}
+        
+        <!-- menu (listado) -->
+        {% if exhibiciones %} 
 
         <div class="mx-auto mb-5" style="max-width: 800px;">
 
@@ -43,7 +44,7 @@
                         </span>
 
                         <span class="fs-5">
-                            {{ exhibicion.Nombre }}
+                            {{ exhibicion.Nombre }} - {{ exhibicion.Autor }}
                         </span>
 
                         <span class="ms-auto text-muted small">
