@@ -1,29 +1,232 @@
-
 {% extends "base.html" %}
 
-{% block title %} Exhibiciones {% endblock %}
+{% block title %}Exhibiciones{% endblock %}
 
 {% block content %}
 
-<h1>Exhibiciones de artistas realizadas en Mayab</h1>
+<div class="container py-5">
 
-<p> 
-    texto sobre mayab como espacio para exhibiciones. <br>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
-</p>
+    {# Encabezado #}
+    <div class="text-center mb-5">
 
-<hr>
+        <h1 class="display-5 fw-semibold">
+            Exhibiciones en Mayab
+        </h1>
 
-{% if exhibiciones %}
-    
-    {% for exhibicion in exhibiciones %}
+        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+            Mayab es un espacio dedicado a la creación, exhibición y
+            encuentro alrededor del arte. Conoce las exposiciones que
+            han formado parte de nuestra historia.
+        </p>
 
-        <ol>Nombre de exhibición: {{exhibicion.Nombre}}</ol>
+        <br>
 
-    {% endfor %}
+        {% if exhibiciones %}
 
-{% else %}
-    <p>Sin exhibiciones aún</p>
-{% endif %}
+        <div class="mx-auto mb-5" style="max-width: 800px;">
+
+            <h5 class="text-uppercase text-muted text-center mb-4" style="letter-spacing: 0.15em;">
+                Colección
+            </h5>
+
+            <div class="list-group list-group-flush">
+
+                {% for exhibicion in exhibiciones %}
+
+                <a href="#exhibicion-{{ exhibicion.id }}" class="list-group-item list-group-item-action
+                      border-0 border-bottom py-3 px-2">
+
+                    <div class="d-flex align-items-center">
+
+                        <span class="text-muted me-4" style="min-width: 35px;">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </span>
+
+                        <span class="fs-5">
+                            {{ exhibicion.Nombre }}
+                        </span>
+
+                        <span class="ms-auto text-muted small">
+                            {{ exhibicion.Fecha_exhibicion|date:"d-m-Y" }}
+                        </span>
+
+                    </div>
+
+                </a>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+    {% if exhibiciones %}
+
+    <div class="exhibiciones">
+
+        {% for exhibicion in exhibiciones %}
+
+        <div id="exhibicion-{{ exhibicion.id }}" class="card border-0 shadow-sm mb-5 overflow-hidden">
+
+            <div class="row g-0">
+
+                {# Galería #}
+                <div class="col-12 col-lg-6">
+
+                    {% with fotos=exhibicion.fotos.all %}
+
+                    {% if fotos %}
+
+                    <div id="carouselExhibicion{{ exhibicion.id }}" class="carousel slide h-100"
+                        data-bs-ride="carousel">
+
+                        <div class="carousel-inner h-100">
+
+                            {% for foto in fotos %}
+
+                            <div class="carousel-item 
+                                                        {% if forloop.first %}active{% endif %}
+                                                        h-100">
+
+                                <img src="{{ foto.Imagen.url }}" class="d-block w-100" alt="{{ exhibicion.Nombre }}"
+                                    style="height: 500px; object-fit: cover;">
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        {% if fotos|length > 1 %}
+
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselExhibicion{{ exhibicion.id }}" data-bs-slide="prev">
+
+                            <span class="carousel-control-prev-icon"></span>
+
+                            <span class="visually-hidden">
+                                Anterior
+                            </span>
+
+                        </button>
+
+
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carouselExhibicion{{ exhibicion.id }}" data-bs-slide="next">
+
+                            <span class="carousel-control-next-icon"></span>
+
+                            <span class="visually-hidden">
+                                Siguiente
+                            </span>
+
+                        </button>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="bg-light d-flex
+                                            align-items-center
+                                            justify-content-center" style="height: 400px;">
+
+                        <span class="text-muted">
+                            Sin fotografías disponibles
+                        </span>
+
+                    </div>
+
+                    {% endif %}
+
+                    {% endwith %}
+
+                </div>
+
+
+                {# Información de la exhibición #}
+                <div class="col-12 col-lg-6">
+
+                    <div class="card-body p-4 p-lg-5 h-100
+                                    d-flex flex-column">
+
+                        <div>
+
+                            <h2 class="card-title display-6 fw-semibold">
+                                {{ exhibicion.Nombre }}
+                            </h2>
+
+                            <h3 class="card-title display-8 fw-semibold">
+                                Artista: {{ exhibicion.Autor }}
+                            </h3>
+
+                            <p class="text-muted mb-4">
+
+                                <i class="bi bi-calendar3"></i>
+
+                                {{ exhibicion.Fecha_exhibicion|date:"d-m-Y" }}
+
+                            </p>
+
+                            <hr>
+
+                            {% if exhibicion.Descripcion %}
+
+                            <p class="card-text">
+                                {{ exhibicion.Descripcion }}
+                            </p>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="mt-auto pt-4">
+
+                            <hr>
+
+                            <small class="text-muted">
+                                Exhibición realizada en Mayab
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin exhibiciones aún
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestras exhibiciones.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
 
 {% endblock %}
