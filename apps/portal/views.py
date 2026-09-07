@@ -50,7 +50,7 @@ def exhibitions(request):
     '''
     display exhibitions registered 
     '''
-    exhibiciones = Exhibicion.objects.order_by("Fecha_exhibicion")
+    exhibiciones = Exhibicion.objects.order_by("-Fecha_exhibicion")
 
     return render(request,
                    "portal/exhibitions.html",
