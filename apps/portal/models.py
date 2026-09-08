@@ -112,8 +112,8 @@ class Decoracion(models.Model):
     class CategoriasDecoracion(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
 
-        Espejo = 'espejo', 'espejos'
-        Lampara = 'lampara', 'lámparas'
+        Espejo = 'espejo', 'Espejos'
+        Lampara = 'lampara', 'Lámparas'
         Metalisteria = 'metalisteria', 'Metalistería'
         Acabado_antique = 'acabado_antique', 'Acabado antique'
         Vidrio_ceramica = 'vidrio_ceramica', 'Vidrio y cerámica'

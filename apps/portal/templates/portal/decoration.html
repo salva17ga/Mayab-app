@@ -1,24 +1,88 @@
 {% extends "base.html" %}
 
-{% block title %} Decoración {% endblock %}
+{% block title %}Decoración{% endblock %}
 
 {% block content %}
 
-<h1>Decoración con gusto mayab</h1>
+<div class="container py-5">
 
-<p> texto bonito de accesorios de decoración. 
-    <br>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
-</p>
+{# Encabezado #}
+<div class="text-center mb-5">
 
-<hr>
+    <h1 class="display-5 fw-semibold">
+        Decoración
+    </h1>
 
+    <p class="lead text-muted mx-auto"
+       style="max-width: 800px;">
+        Objetos y accesorios seleccionados para transformar los
+        espacios a través de los materiales, las formas y los
+        detalles que hacen de cada lugar algo único.
+    </p>
+
+</div>
+
+
+{# Introducción #}
+<div class="row justify-content-center mb-5">
+
+    <div class="col-12 col-lg-9">
+
+        <div class="text-center">
+
+            <p class="text-muted">
+                En Mayab creemos que los pequeños detalles tienen
+                la capacidad de transformar un espacio. Nuestra
+                selección de objetos decorativos combina diseño,
+                artesanía y materiales cuidadosamente elegidos
+                para complementar distintas formas de habitar.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<hr class="my-5">
+
+
+{# Catálogo #}
 {% if productos %}
 
-    {% include "portal/partials/catalogo.html" %} 
+    <div class="mb-4">
+
+        <h2 class="h4 fw-semibold">
+            Selección Mayab
+        </h2>
+
+        <p class="text-muted">
+            Explora nuestra colección de accesorios y objetos
+            decorativos.
+        </p>
+
+    </div>
+
+    {% include "portal/partials/catalogo.html" %}
 
 {% else %}
-    <p>No hay productos disponibles por el momento</p>
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin productos disponibles
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestra selección
+            de objetos y accesorios de decoración.
+        </p>
+
+    </div>
 
 {% endif %}
+
+</div>
+
 {% endblock %}
