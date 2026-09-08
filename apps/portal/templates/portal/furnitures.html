@@ -1,24 +1,87 @@
 {% extends "base.html" %}
 
-{% block title %} Muebles {% endblock %}
+{% block title %}Muebles{% endblock %}
 
 {% block content %}
 
-<h1>Muebles finos de autor selección mayab</h1>
+<div class="container py-5">
 
-<p> texto bonito de muebles. 
-    <br>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
-</p>
+{# Encabezado #}
+<div class="text-center mb-5">
 
-<hr>
+    <h1 class="display-5 fw-semibold">
+        Muebles de autor
+    </h1>
 
+    <p class="lead text-muted mx-auto"
+       style="max-width: 800px;">
+        Una selección de muebles concebidos como piezas de diseño,
+        donde los materiales, la artesanía y la funcionalidad
+        encuentran un punto de encuentro.
+    </p>
+
+</div>
+
+
+{# Introducción #}
+<div class="row justify-content-center mb-5">
+
+    <div class="col-12 col-lg-9">
+
+        <div class="text-center">
+
+            <p class="text-muted">
+                En Mayab buscamos recuperar el valor de los objetos
+                hechos con atención al detalle. Cada pieza forma parte
+                de una propuesta que combina diseño, materiales
+                y trabajo artesanal para crear muebles destinados
+                a permanecer.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<hr class="my-5">
+
+
+{# Catálogo #}
 {% if productos %}
+
+    <div class="mb-4">
+
+        <h2 class="h4 fw-semibold">
+            Selección Mayab
+        </h2>
+
+        <p class="text-muted">
+            Explora nuestra colección de muebles disponibles.
+        </p>
+
+    </div>
 
     {% include "portal/partials/catalogo.html" %}
 
 {% else %}
-    <p>No hay muebles disponibles por el momento</p>
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin muebles disponibles
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestra selección
+            de muebles de autor.
+        </p>
+
+    </div>
 
 {% endif %}
+
+</div>
+
 {% endblock %}

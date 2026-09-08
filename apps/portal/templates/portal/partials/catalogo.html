@@ -74,9 +74,16 @@
                         {{ producto.Nombre }}
                     </h3>
 
+                    <div class="text-start mb-3">
+                        <span class="badge text-bg-light border">
+                            {{ producto.get_Categoria_display }}
+                        </span>
+                    </div>
+
                     <h4 class="card-title fs-5">
                         Autor: {{ producto.Autor }}
                     </h4>
+
 
                     {% if producto.Descripcion %}
                     <p class="card-text text-muted">
