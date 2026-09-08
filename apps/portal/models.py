@@ -162,7 +162,7 @@ class Arte(models.Model):
     class CategoriasArte(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
 
-        Pintura = 'pintura', 'Pinturas'
+        Pintura = 'pintura', 'Pintura'
         Escultura = 'escultura', 'Escultura'
         Fotografia = 'fotografia', 'Fotografía'
         Arte_autoctono = 'arte_autoctono', 'Arte autóctono'

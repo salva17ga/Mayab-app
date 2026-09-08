@@ -1,24 +1,89 @@
 {% extends "base.html" %}
 
-{% block title %} Arte {% endblock %}
+{% block title %}Arte{% endblock %}
 
 {% block content %}
 
-<h1>Arte selección mayab</h1>
+<div class="container py-5">
 
-<p> texto bonito de arte
-    <br>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
-</p>
+```
+{# Encabezado #}
+<div class="text-center mb-5">
 
-<hr>
+    <h1 class="display-5 fw-semibold">
+        Arte
+    </h1>
 
+    <p class="lead text-muted mx-auto"
+       style="max-width: 800px;">
+        Una selección de obras y piezas de artistas que encuentran
+        en Mayab un espacio para la expresión, la creación y el
+        encuentro con nuevos públicos.
+    </p>
+
+</div>
+
+
+{# Introducción #}
+<div class="row justify-content-center mb-5">
+
+    <div class="col-12 col-lg-9">
+
+        <div class="text-center">
+
+            <p class="text-muted">
+                En Mayab creemos en el arte como una forma de
+                explorar nuestra relación con los materiales,
+                el territorio y la cultura. Nuestra selección
+                reúne obras que dialogan con distintas formas
+                de creación y expresión contemporánea.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<hr class="my-5">
+
+
+{# Catálogo #}
 {% if productos %}
+
+    <div class="mb-4">
+
+        <h2 class="h4 fw-semibold">
+            Selección Mayab
+        </h2>
+
+        <p class="text-muted">
+            Explora nuestra colección de obras disponibles.
+        </p>
+
+    </div>
 
     {% include "portal/partials/catalogo.html" %}
 
 {% else %}
-    <p>No hay arte disponible por el momento</p>
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin obras disponibles
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestra selección
+            de arte.
+        </p>
+
+    </div>
 
 {% endif %}
+```
+
+</div>
+
 {% endblock %}
