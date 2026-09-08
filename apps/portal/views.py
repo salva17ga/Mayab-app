@@ -60,9 +60,11 @@ def interior_design(request):
     '''
     display interior design photos
     '''
-    interiores = Interiorismo.objects.all()
+    interiores = Interiorismo.objects.order_by("-Fecha_registro")
 
     return render(request, 
                   "portal/interior.html",
                   {"interiores" : interiores})
+
+
 ### TODO: error handling routes 

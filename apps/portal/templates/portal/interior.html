@@ -1,29 +1,222 @@
-
 {% extends "base.html" %}
 
-{% block title %} Interiorismo {% endblock %}
+{% block title %}Interiorismo{% endblock %}
 
 {% block content %}
 
-<h1>Interiorismo realizado por nosotros</h1>
+<div class="container py-5">
 
-<p> 
-    texto sobre mayab como espacio para exhibiciones. <br>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
-</p>
+{# Encabezado #}
+<div class="text-center mb-5">
 
-<hr>
+    <h1 class="display-5 fw-semibold">
+        Interiorismo
+    </h1>
+
+    <p class="lead text-muted mx-auto" style="max-width: 800px;">
+        Una selección de espacios, materiales y propuestas de
+        interiorismo que forman parte de la visión estética de Mayab.
+    </p>
+
+</div>
+
 
 {% if interiores %}
-    
-    {% for interior in interiores %}
 
-        <ol>Diseño de interior: {{interior.Nombre}}</ol>
+    {# Índice de proyectos #}
+    <div class="mx-auto mb-5" style="max-width: 800px;">
 
-    {% endfor %}
+        <h5 class="text-uppercase text-muted text-center mb-4"
+            style="letter-spacing: 0.15em;">
+            Diseños y espacios
+        </h5>
+
+        <div class="list-group list-group-flush">
+
+            {% for espacio in interiores %}
+
+                <a href="#espacio-{{ espacio.id }}"
+                   class="list-group-item list-group-item-action
+                          border-0 border-bottom py-3 px-2">
+
+                    <div class="d-flex align-items-center">
+
+                        <span class="text-muted me-4"
+                              style="min-width: 35px;">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </span>
+
+                        <span class="fs-5">
+                            {{ espacio.Nombre }}
+                        </span>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    {# Galería de espacios #}
+    <div class="interiorismo">
+
+        {% for espacio in interiores %}
+
+            <div id="espacio-{{ espacio.id }}"
+                 class="card border-0 shadow-sm mb-5 overflow-hidden">
+
+                <div class="row g-0">
+
+                    {# Fotografías #}
+                    <div class="col-12 col-lg-7">
+
+                        {% with fotos=espacio.fotos.all %}
+
+                            {% if fotos %}
+
+                                <div id="carouselInteriorismo{{ espacio.id }}"
+                                     class="carousel slide"
+                                     data-bs-ride="carousel">
+
+                                    <div class="carousel-inner">
+
+                                        {% for foto in fotos %}
+
+                                            <div class="carousel-item
+                                                        {% if forloop.first %}active{% endif %}">
+
+                                                <img src="{{ foto.Imagen.url }}"
+                                                     class="d-block w-100"
+                                                     alt="{{ espacio.Nombre }}"
+                                                     style="height: 450px;
+                                                            object-fit: cover;">
+
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
+
+
+                                    {% if fotos|length > 1 %}
+
+                                        <button class="carousel-control-prev"
+                                                type="button"
+                                                data-bs-target="#carouselInteriorismo{{ espacio.id }}"
+                                                data-bs-slide="prev">
+
+                                            <span class="carousel-control-prev-icon"></span>
+
+                                            <span class="visually-hidden">
+                                                Anterior
+                                            </span>
+
+                                        </button>
+
+
+                                        <button class="carousel-control-next"
+                                                type="button"
+                                                data-bs-target="#carouselInteriorismo{{ espacio.id }}"
+                                                data-bs-slide="next">
+
+                                            <span class="carousel-control-next-icon"></span>
+
+                                            <span class="visually-hidden">
+                                                Siguiente
+                                            </span>
+
+                                        </button>
+
+                                    {% endif %}
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="bg-light d-flex
+                                            align-items-center
+                                            justify-content-center"
+                                     style="height: 450px;">
+
+                                    <span class="text-muted">
+                                        Sin fotografías disponibles
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+                        {% endwith %}
+
+                    </div>
+
+
+                    {# Información #}
+                    <div class="col-12 col-lg-5">
+
+                        <div class="card-body p-4 p-lg-5 h-100
+                                    d-flex flex-column">
+
+                            <div>
+
+                                <h2 class="card-title display-6 fw-semibold">
+                                    {{ espacio.Nombre }}
+                                </h2>
+
+                                {% if espacio.Descripcion %}
+
+                                    <p class="card-text">
+                                        {{ espacio.Descripcion }}
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="mt-auto pt-4">
+
+                                <hr>
+
+                                <small class="text-muted">
+                                    Proyecto realizado por Mayab
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
 
 {% else %}
-    <p>Sin fotos de interiorismo aún</p>
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin proyectos aún
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestra selección
+            de espacios e interiorismo.
+        </p>
+
+    </div>
+
 {% endif %}
+
+</div>
 
 {% endblock %}

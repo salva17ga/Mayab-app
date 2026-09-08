@@ -224,12 +224,12 @@ class Exhibicion(models.Model):
             return self.Nombre
 
 class Interiorismo(models.Model): 
-    '''Datos asociados a fotografias de diseño de espacioos'''
+    '''Datos asociados a fotografias de diseño de espacios'''
     Nombre = models.CharField(max_length=100,
-                                  verbose_name="Nombre de la exhibición", 
-                                  help_text="Nombre de la exhibición")
-    Descripcion = models.TextField(verbose_name="Descripción de la exhibición",
-                                       help_text="Descripción de la exhibición",
+                                  verbose_name="Nombre del diseño", 
+                                  help_text="Nombre del diseño")
+    Descripcion = models.TextField(verbose_name="Descripción del diseño (opcional)",
+                                       help_text="Descripción del diseñ (opcional)",
                                        blank=True,
                                        null=True)
     Fecha_registro = models.DateField(auto_now_add=True,
