@@ -108,7 +108,8 @@
                         </span>
                         {% endif %}
 
-                        <a href="#" class="btn btn-outline-dark w-100">
+                        <a href="{% url 'product_detail' tipo=tipo_producto id=producto.id %}"
+                            class="btn btn-outline-dark w-100">
                             Ver pieza
                         </a>
 

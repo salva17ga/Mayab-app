@@ -30,6 +30,7 @@ urlpatterns = [
     path('decoration', apps.portal.views.decoration, name = 'decoration'), 
     path('exhibitions', apps.portal.views.exhibitions, name = 'exhibitions'), 
     path('interior_design', apps.portal.views.interior_design, name = 'interior_design'), 
+    path('product_detail/<str:tipo>/<int:id>/', apps.portal.views.product_detail, name='product_detail'),
     path(
         "password_reset/",
         auth_views.PasswordResetView.as_view(

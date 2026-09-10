@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from apps.portal.models import Mueble, Decoracion, Arte, Exhibicion, Interiorismo
+from django.shortcuts import render, get_object_or_404
 
 ### views
 
@@ -21,10 +22,12 @@ def furnitures(request):
     '''
     
     productos = Mueble.objects.all()
+    tipo_producto = 'Mueble'
 
     return render(request,
                    "portal/furnitures.html",
-                   {"productos":productos})
+                   {"productos":productos,
+                    "tipo_producto": tipo_producto})
 
 def art(request): 
     '''
@@ -32,9 +35,12 @@ def art(request):
     '''
     productos = Arte.objects.all()
     
+    tipo_producto = 'Arte'
+    
     return render(request,
                        "portal/art.html",
-                       {"productos":productos})
+                       {"productos":productos,
+                        "tipo_producto": tipo_producto})
 
 def decoration(request): 
     '''
@@ -42,9 +48,12 @@ def decoration(request):
     '''
     productos = Decoracion.objects.all()
     
+    tipo_producto = 'Decoracion'
+    
     return render(request,
                        "portal/decoration.html",
-                       {"productos":productos})
+                       {"productos":productos,
+                        "tipo_producto": tipo_producto})
 
 def exhibitions(request): 
     '''
@@ -66,14 +75,25 @@ def interior_design(request):
                   "portal/interior.html",
                   {"interiores" : interiores})
 
-def details_product(request, model_name, id): 
+def product_detail(request, tipo, id): 
     '''
     display a template entirely dedicated to a product selected from a catalog
     '''
-    ### TODO: finish this route 
-    product = 1 
-    return render(request,
-                  "portal/details_product.html",
-                  {"product" : product})
+    if tipo == "Mueble":
+        producto = get_object_or_404(Mueble, pk=id)
+
+    elif tipo == "Arte":
+        producto = get_object_or_404(Arte, pk=id)
+
+    elif tipo == "Decoracion":
+        producto = get_object_or_404(Decoracion, pk=id)
+
+    return render(
+        request,
+        "portal/product_detail.html",
+        {"producto": producto,
+         "tipo_producto": tipo}
+    )
+
 
 ### TODO: error handling routes 
