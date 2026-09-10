@@ -1,16 +1,225 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} Index {% endblock %}
+{% block title %}Mayab{% endblock %}
 
 {% block content %}
 
-<h1>Página de index </h1>
+<!-- Hero -->
 
-<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
-</p>
+<section class="hero-mayab"
+         style="background-image: url('{% static '/images/sala_mayab.jpg' %}');">
 
-<img src="{% static 'portal/images/logo_mayab.jpg' %}" alt="">
+<div class="hero-mayab-text">
+    <img src="{% static 'images/logo_mayab.png' %}"
+         alt="Mayab"
+         class="img-fluid"
+         style="width: 100%; max-width: 20rem;">
+    <div>Muebles</div>
+    <div>Arte</div>
+    <div>Diseño</div>
+</div>
+
+</section>
+
+<!-- Introducción -->
+
+<section class="container py-5">
+
+<div class="text-center mx-auto" style="max-width: 800px;">
+
+    <p class="text-uppercase text-muted small mb-3">
+        Mayab
+    </p>
+
+    <h2 class="display-6 fw-semibold mb-4">
+        Arte, diseño y tradición
+        en un mismo espacio.
+    </h2>
+
+    <p class="lead text-muted">
+        Mayab reúne piezas de mobiliario, arte, objetos
+        y proyectos de interiorismo que dialogan con la
+        riqueza cultural y material de México.
+    </p>
+
+</div>
+
+</section>
+
+<hr class="my-2">
+
+<!-- Colecciones -->
+
+<section id="colecciones" class="container py-5">
+
+<div class="text-center mb-5">
+
+    <h2 class="display-6 fw-semibold">
+        Colecciones
+    </h2>
+
+    <p class="text-muted">
+        Descubre nuestra selección.
+    </p>
+
+</div>
+
+<div class="row g-4">
+
+    <!-- Arte -->
+    <div class="col-12 col-md-4">
+
+        <a href="{% url 'art' %}"
+           class="text-decoration-none text-dark">
+
+            <div class="collection-card">
+
+                <img src="{% static '/images/arte_mayab.jpg' %}"
+                     alt="Arte"
+                     class="img-fluid">
+
+                <div class="py-3">
+                    <h3 class="h4 mb-1">Arte</h3>
+                    <p class="text-muted mb-0">
+                        Obras y expresiones de artistas.
+                    </p>
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- Muebles -->
+    <div class="col-12 col-md-4">
+
+        <a href="{% url 'furnitures' %}"
+           class="text-decoration-none text-dark">
+
+            <div class="collection-card">
+
+                <img src="{% static 'images/mueble_mayab.jpg' %}"
+                     alt="Muebles"
+                     class="img-fluid">
+
+                <div class="py-3">
+                    <h3 class="h4 mb-1">Muebles</h3>
+                    <p class="text-muted mb-0">
+                        Diseño, materiales y funcionalidad.
+                    </p>
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- Decoración -->
+    <div class="col-12 col-md-4">
+
+        <a href="{% url 'decoration' %}"
+           class="text-decoration-none text-dark">
+
+            <div class="collection-card">
+
+                <img src="{% static '/images/decoracion_mayab.jpg' %}"
+                     alt="Decoración"
+                     class="img-fluid">
+
+                <div class="py-3">
+                    <h3 class="h4 mb-1">Decoración</h3>
+                    <p class="text-muted mb-0">
+                        Objetos que transforman los espacios.
+                    </p>
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+<hr class="my-2">
+
+<!-- Interiorismo -->
+
+<section class="container py-5">
+
+<div class="row align-items-center g-5">
+
+    <div class="col-12 col-lg-5">
+
+        <p class="text-uppercase text-muted small mb-3">
+            Proyectos
+        </p>
+
+        <h2 class="display-6 fw-semibold mb-4">
+            Interiorismo
+        </h2>
+
+        <p class="lead text-muted">
+            Espacios donde el diseño, los materiales
+            y los objetos dialogan para construir
+            ambientes con identidad.
+        </p>
+
+        <a href="{% url 'interior_design' %}"
+           class="btn btn-dark mt-3 px-4">
+            Ver proyectos
+        </a>
+
+    </div>
+
+    <div class="col-12 col-lg-7">
+
+        <img src="{% static '/images/interiorismo_mayab.jpg' %}"
+             alt="Interiorismo Mayab"
+             class="img-fluid w-100">
+
+    </div>
+
+</div>
+
+</section>
+
+<hr class="my-2">
+
+<!-- Exhibiciones -->
+
+<section class="container py-5">
+
+<div class="text-center mx-auto"
+     style="max-width: 750px;">
+
+    <p class="text-uppercase text-muted small mb-3">
+        Historia y encuentros
+    </p>
+
+    <h2 class="display-6 fw-semibold mb-4">
+        Exhibiciones
+    </h2>
+
+    <p class="lead text-muted">
+        Un recorrido por las exposiciones que han formado
+        parte de la historia de Mayab.
+    </p>
+
+    <a href="{% url 'exhibitions' %}"
+       class="btn btn-outline-dark mt-3 px-4">
+        Conocer exhibiciones
+    </a>
+
+</div>
+
+</section>
 
 {% endblock %}

@@ -22,7 +22,7 @@
 /* Marca (logo / nombre) */
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: var(--mayab-gold) !important;
   letter-spacing: 1px;
 }
@@ -33,6 +33,7 @@
   margin: 0 0.4rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  font-size: 1.6rem; 
 }
 
 /* Hover elegante */
@@ -91,3 +92,68 @@ footer{
     margin-right: 5rem;
     padding: 0.5rem;
 }
+
+
+/* #################  INDEX ################# */
+
+.hero-mayab {
+  position: relative;
+
+  background-image: url("/images/sala_mayab.jpg");
+  background-repeat: no-repeat;
+  
+  min-height: 85vh;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-mayab::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.hero-mayab-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    background-color:#F8F7F680;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    
+}
+
+
+.collection-card {
+transition: transform 0.25s ease;
+}
+
+.collection-card:hover {
+transform: translateY(-4px);
+}
+
+.collection-card img {
+width: 100%;
+height: 320px;
+object-fit: cover;
+}
+
+@media (max-width: 576px) {
+
+.collection-card img {
+    height: 260px;
+}
+
+}
+

@@ -66,5 +66,14 @@ def interior_design(request):
                   "portal/interior.html",
                   {"interiores" : interiores})
 
+def details_product(request, model_name, id): 
+    '''
+    display a template entirely dedicated to a product selected from a catalog
+    '''
+    ### TODO: finish this route 
+    product = 1 
+    return render(request,
+                  "portal/details_product.html",
+                  {"product" : product})
 
 ### TODO: error handling routes 
