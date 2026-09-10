@@ -6,8 +6,8 @@
 
 /* Colores Mayab */
 :root {
-  --mayab-blue: #3E4963;      /* RGB(62, 73, 99) */
-  --mayab-gold: #CFAD71;      /* RGB(207, 173, 113) */
+  --mayab-blue: #344769;      /* RGB(52, 71, 105) */
+  --mayab-gold: #D1AE6B;      
   --mayab-dark: #1C2027;      /* RGB(28, 32, 39) */
   --mayab-white: #F8F7F6;
 }
@@ -160,7 +160,7 @@ object-fit: cover;
 /* ################# PRODUCT DETAIL ################# */
 
 .product-gallery {
-    max-width: 1100px;
+    max-width: 65rem;
     margin: 0 auto;
 }
 
