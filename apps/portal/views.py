@@ -20,40 +20,58 @@ def furnitures(request):
     '''
     display furniture's catalog
     '''
-    
-    productos = Mueble.objects.all()
+    categoria = request.GET.get("categoria")
+    if categoria: 
+        productos = Mueble.objects.filter(Categoria=categoria)
+    else:
+        productos = Mueble.objects.all()
+
     tipo_producto = 'Mueble'
 
     return render(request,
                    "portal/furnitures.html",
                    {"productos":productos,
-                    "tipo_producto": tipo_producto})
+                    "tipo_producto": tipo_producto,
+                    "categorias": Mueble.CategoriasMuebles.choices,
+                    "categoria_actual": categoria})
 
 def art(request): 
     '''
     display art catalog
     '''
-    productos = Arte.objects.all()
+    categoria = request.GET.get("categoria")
+    if categoria: 
+        productos = Arte.objects.filter(Categoria=categoria)
+    else:
+        productos = Arte.objects.all()
     
     tipo_producto = 'Arte'
     
     return render(request,
                        "portal/art.html",
                        {"productos":productos,
-                        "tipo_producto": tipo_producto})
+                        "tipo_producto": tipo_producto,
+                        "categorias": Arte.CategoriasArte.choices,
+                        "categoria_actual": categoria})
 
 def decoration(request): 
     '''
     display decoration items catalog
     '''
-    productos = Decoracion.objects.all()
-    
+    categoria = request.GET.get("categoria")
+    if categoria: 
+        productos = Decoracion.objects.filter(Categoria=categoria)
+    else:
+        productos = Decoracion.objects.all()
+
     tipo_producto = 'Decoracion'
     
     return render(request,
                        "portal/decoration.html",
                        {"productos":productos,
-                        "tipo_producto": tipo_producto})
+                        "tipo_producto": tipo_producto,
+                        "categorias": Decoracion.CategoriasDecoracion.choices,
+                        "categoria_actual": categoria})
 
 def exhibitions(request): 
     '''
