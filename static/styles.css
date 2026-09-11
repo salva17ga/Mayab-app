@@ -2,7 +2,13 @@
 
 /*  ############################ base.html #################################### */
 
-/* BARRA DE NAVEGACION */
+/* font mayab style (Inter) */
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
 
 /* Colores Mayab */
 :root {
@@ -11,6 +17,8 @@
   --mayab-dark: #1C2027;      /* RGB(28, 32, 39) */
   --mayab-white: #F8F7F6;
 }
+
+/* BARRA DE NAVEGACION */
 
 /* Navbar estilo Mayab */
 .navbar {
