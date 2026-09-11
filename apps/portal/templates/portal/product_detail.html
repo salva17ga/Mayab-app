@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}{{ producto.Nombre }} | Mayab{% endblock %}
+
+{% block content %}
+
+<!-- Encabezado de la pieza -->
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-9 text-center">
+
+            <p class="text-uppercase text-muted fs-6 mb-3">
+                {{ producto.get_Categoria_display }}
+            </p>
+
+            <h1 class="display-5 fw-semibold mb-3">
+                {{ producto.Nombre }}
+            </h1>
+
+            <p class="text-muted fs-5 mb-0">
+                Autor: {{ producto.Autor }}
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<hr class="my-0">
+
+
+<!-- Información -->
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-8">
+
+            {% if producto.Descripcion %}
+
+            <div class="mb-5">
+
+                <h2 class="h5 text-uppercase fw-semibold mb-3">
+                    Descripción
+                </h2>
+
+                <p class="lead text-muted">
+                    {{ producto.Descripcion }}
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="col-md-6">
+
+                {% if producto.Disponible %}
+
+                <span class="badge text-bg-success mb-3">
+                    Disponible
+                </span>
+
+                <p class="fs-3 fw-semibold mb-0">
+                    ${{ producto.Precio }} MXN
+                </p>
+
+                {% else %}
+
+                <span class="badge text-bg-warning mb-3">
+                    No disponible
+                </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Galería -->
+
+<section class="container pb-5">
+
+    {% with fotos=producto.fotos.all %}
+
+    {% if fotos %}
+
+    <div class="product-gallery">
+
+        {% for foto in fotos %}
+
+        <figure class="mb-5">
+
+            <img src="{{ foto.Imagen.url }}" alt="{{ producto.Nombre }}" class="img-fluid w-100">
+
+        </figure>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="product-no-image d-flex
+                        align-items-center justify-content-center">
+
+        <span class="text-muted">
+            Sin fotografía
+        </span>
+
+    </div>
+
+    {% endif %}
+
+    {% endwith %}
+
+</section>
+
+
+<hr class="my-0">
+
+
+
+<!-- Regresar al catálogo -->
+<section class="container pb-5">
+
+    <div class="text-center">
+
+        {% if tipo_producto == "Mueble" %}
+
+        <a href="{% url 'furnitures' %}"
+           class="text-decoration-none text-muted fs-5">
+            ← Volver a muebles
+        </a>
+
+        {% elif tipo_producto == "arte" %}
+
+        <a href="{% url 'Art' %}"
+           class="text-decoration-none text-muted fs-5">
+            ← Volver a arte
+        </a>
+
+        {% elif tipo_producto == "Decoracion" %}
+
+        <a href="{% url 'decoration' %}"
+           class="text-decoration-none text-muted fs-5">
+            ← Volver a decoración
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

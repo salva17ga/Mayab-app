@@ -1,24 +1,141 @@
 {% extends "base.html" %}
 
-{% block title %} Decoración {% endblock %}
+{% block title %}Decoración{% endblock %}
 
 {% block content %}
 
-<h1>Decoración con gusto mayab</h1>
+<div class="container py-5">
 
-<p> texto bonito de accesorios de decoración. 
-    <br>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non fugiat error? Sit itaque tenetur magni modi incidunt culpa facilis sed maiores vel at id, magnam facere accusamus molestiae ipsa?
-</p>
+{# Encabezado #}
+<div class="text-center mb-5">
 
-<hr>
+    <h1 class="display-5 fw-semibold inter-font">
+        Decoración
+    </h1>
 
+    <p class="lead text-muted mx-auto"
+       style="max-width: 800px;">
+        Objetos y accesorios seleccionados para transformar los
+        espacios a través de los materiales, las formas y los
+        detalles que hacen de cada lugar algo único.
+    </p>
+
+</div>
+
+
+{# Introducción #}
+<div class="row justify-content-center mb-5">
+
+    <div class="col-12 col-lg-9">
+
+        <div class="text-center">
+
+            <p class="text-muted">
+                En Mayab creemos que los pequeños detalles tienen
+                la capacidad de transformar un espacio. Nuestra
+                selección de objetos decorativos combina diseño,
+                artesanía y materiales cuidadosamente elegidos
+                para complementar distintas formas de habitar.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    {# Catálogo + filtro #}
+
+    <hr class="my-5">
+
+    <div class="container py-4">
+
+
+        <div class="row align-items-center">
+
+            {# Información del catálogo #}
+            <div class="col-12 col-md-6">
+
+                <h2 class="h4 fw-semibold mb-2">
+                    Selección Mayab
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Explora nuestra colección de muebles disponibles.
+                </p>
+
+            </div>
+
+
+            {# Filtro #}
+
+            <div class="col-12 col-md-6">
+
+                <form method="get">
+
+                    <div class="d-flex flex-column flex-sm-row
+                justify-content-md-end
+                align-items-stretch align-items-sm-center
+                gap-2">
+
+                        <label for="categoria" class="mb-0 text-nowrap">
+                            Filtrar por categoría
+                        </label>
+
+                        <select name="categoria" id="categoria" class="form-select" style="min-width: 0;">
+
+                            <option value="">
+                                Todas las categorías
+                            </option>
+
+                            {% for valor, nombre in categorias %}
+
+                            <option value="{{ valor }}" {% if categoria_actual == valor %}selected{% endif %}>
+                                {{ nombre }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <button type="submit" class="btn btn-outline-dark text-nowrap">
+                            Filtrar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+{# Catálogo #}
 {% if productos %}
 
-    {% include "portal/catalogo.html" %}
+    {% include "portal/partials/catalogo.html" %}
 
 {% else %}
-    <p>No hay productos disponibles por el momento</p>
+
+    <div class="text-center py-5">
+
+        <h3 class="text-muted">
+            Sin productos disponibles
+        </h3>
+
+        <p class="text-muted">
+            Próximamente encontrarás aquí nuestra selección
+            de objetos y accesorios de decoración.
+        </p>
+
+    </div>
 
 {% endif %}
+
+</div>
+
 {% endblock %}

@@ -112,8 +112,8 @@ class Decoracion(models.Model):
     class CategoriasDecoracion(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
 
-        Espejo = 'espejo', 'espejos'
-        Lampara = 'lampara', 'lámparas'
+        Espejo = 'espejo', 'Espejos'
+        Lampara = 'lampara', 'Lámparas'
         Metalisteria = 'metalisteria', 'Metalistería'
         Acabado_antique = 'acabado_antique', 'Acabado antique'
         Vidrio_ceramica = 'vidrio_ceramica', 'Vidrio y cerámica'
@@ -162,7 +162,7 @@ class Arte(models.Model):
     class CategoriasArte(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
 
-        Pintura = 'pintura', 'Pinturas'
+        Pintura = 'pintura', 'Pintura'
         Escultura = 'escultura', 'Escultura'
         Fotografia = 'fotografia', 'Fotografía'
         Arte_autoctono = 'arte_autoctono', 'Arte autóctono'
@@ -204,6 +204,8 @@ class Exhibicion(models.Model):
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre de la exhibición", 
                               help_text="Nombre de la exhibición")
+    Autor = models.CharField(max_length=100,
+                                 help_text="Autor de la obra exhibida")
     Descripcion = models.TextField(verbose_name="Descripción de la exhibición",
                                    help_text="Descripción de la exhibición",
                                    blank=True,
@@ -222,12 +224,12 @@ class Exhibicion(models.Model):
             return self.Nombre
 
 class Interiorismo(models.Model): 
-    '''Datos asociados a fotografias de diseño de espacioos'''
+    '''Datos asociados a fotografias de diseño de espacios'''
     Nombre = models.CharField(max_length=100,
-                                  verbose_name="Nombre de la exhibición", 
-                                  help_text="Nombre de la exhibición")
-    Descripcion = models.TextField(verbose_name="Descripción de la exhibición",
-                                       help_text="Descripción de la exhibición",
+                                  verbose_name="Nombre del diseño", 
+                                  help_text="Nombre del diseño")
+    Descripcion = models.TextField(verbose_name="Descripción del diseño (opcional)",
+                                       help_text="Descripción del diseñ (opcional)",
                                        blank=True,
                                        null=True)
     Fecha_registro = models.DateField(auto_now_add=True,

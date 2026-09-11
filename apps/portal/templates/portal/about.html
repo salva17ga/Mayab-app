@@ -1,13 +1,159 @@
-
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %} Nosotros {% endblock %}
+{% block title %}Nosotros{% endblock %}
 
 {% block content %}
 
-<h1>Página de nosotros </h1>
+<div class="container py-5">
 
-<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, adipisci ex. Ullam eligendi deserunt vel voluptatum voluptate ad temporibus, quis qui incidunt repellendus amet blanditiis tenetur perferendis! Debitis, harum aliquid.
-</p>
+    {# Encabezado #}
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-5 fw-semibold inter-font">
+            Nosotros
+        </h1>
+
+        <p class="lead text-muted mx-auto mt-3" style="max-width: 800px;">
+            Un espacio donde el arte, el diseño, la artesanía y
+            la riqueza cultural de México encuentran un punto de encuentro.
+        </p>
+
+        <div class="mt-4">
+            <img src="{% static 'images/logo_mayab.png' %}" alt="Mayab" class="img-fluid"
+                style="width: 100%; max-width: 20rem;">
+        </div>
+
+
+    </div>
+
+
+    {# Historia / introducción #}
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-12 col-lg-9">
+
+            <p class="fs-5 text-muted text-center">
+                Mayab es un espacio dedicado al arte y al diseño,
+                con una especial atención por los materiales, la
+                artesanía y las expresiones culturales de México.
+            </p>
+
+            <p class="text-muted text-center">
+                Nuestras piezas de mobiliario son elaboradas con
+                precisión y cuidado, buscando un equilibrio entre
+                belleza, funcionalidad y la nobleza de las maderas
+                con las que trabajamos.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <hr class="my-5">
+
+    {# Filosofía #}
+    <div class="row justify-content-center py-5">
+
+        <div class="col-12 col-lg-8 text-center">
+
+            <h2 class="fw-semibold mb-4 inter-font">
+                Nuestra visión
+            </h2>
+
+            <p class="fs-4 text-muted">
+                Crear espacios donde el arte, el diseño y la
+                tradición puedan convivir y encontrar nuevas
+                formas de expresión.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <hr class="my-5">
+
+    {# Arte y diseño #}
+    <div class="row align-items-center py-5">
+
+        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+
+            <h2 class="fw-semibold mb-4 inter-font">
+                Muebles, arte y diseño
+            </h2>
+
+            <p class="text-muted">
+                Nuestra selección reúne muebles de autor, objetos
+                decorativos y obras de arte que buscan establecer
+                un diálogo entre la estética, los materiales y
+                los espacios que habitamos.
+            </p>
+
+            <p class="text-muted">
+                Cada pieza ha sido seleccionada por su carácter,
+                su calidad y su capacidad para formar parte de
+                espacios que trascienden las tendencias.
+                Realizamos también muebles con diseño a la medida.
+            </p>
+            <p class="text-muted">
+                Mayab se encuentra en una de las ciudades más bellas
+                y representativas de México: San Miguel de Allende. Hacemos envíos de obra y muebles a todos los estados
+                de la republica mexicana
+            </p>
+
+
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                <img src="{% static '/images/muebles_arte.jpg' %}" alt="Muebles y arte" class="img-fluid w-100">
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="my-5">
+
+
+    {# Contáctanos #}
+    <div class="row align-items-center py-5">
+
+        <div class="col-12 col-lg-6 order-lg-2 mb-4 mb-lg-0">
+
+            <h2 class="fw-semibold mb-4 inter-font">
+                Contáctanos
+            </h2>
+
+            <p class="text-muted">
+                Te invitamos a visitar la tienda física y conocer nuestras exposiciones
+                en Lavinia's Art Space, Calzada de la Estación 151, San Miguel de Allende
+                (Guanajuato, México), así como a explorar esta página web para conocer más
+                sobre nuestra selección, exhibiciones y proyectos.
+            </p>
+
+            <p class="text-muted">
+                Contacto: mayab.sma@gmail.com
+            </p>
+
+
+        </div>
+
+        <div class="col-12 col-lg-6 order-lg-1">
+
+            <div class="bg-light d-flex align-items-center justify-content-center">
+
+                <img src="{% static 'images/foto_contacto.jpg' %}" alt="Espacio Mayab" class="img-fluid contacto-img">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

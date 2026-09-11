@@ -104,6 +104,7 @@ class ExhibicionAdmin(BaseProductAdmin):
     search_fields = ("Nombre",) 
     list_per_page = 10
     inlines = (FotoInline, )
+    exclude = ('Registrado_por', )
 
 class InteriorismoAdmin(BaseProductAdmin): 
     list_display = ("Nombre", "Descripcion", "Fecha_registro")
@@ -112,6 +113,7 @@ class InteriorismoAdmin(BaseProductAdmin):
     search_fields = ("Nombre",) 
     list_per_page = 10
     inlines = (FotoInline, )
+    exclude = ('Registrado_por', )
 
 class FotoAdmin(admin.ModelAdmin): 
     list_display = ("preview","Imagen", "Fecha_carga", "image_type", "name_of_parent",

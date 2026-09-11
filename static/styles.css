@@ -2,15 +2,23 @@
 
 /*  ############################ base.html #################################### */
 
-/* BARRA DE NAVEGACION */
+/* font mayab style (Inter) */
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
 
 /* Colores Mayab */
 :root {
-  --mayab-blue: #3E4963;      /* RGB(62, 73, 99) */
-  --mayab-gold: #CFAD71;      /* RGB(207, 173, 113) */
+  --mayab-blue: #344769;      /* RGB(52, 71, 105) */
+  --mayab-gold: #D1AE6B;      
   --mayab-dark: #1C2027;      /* RGB(28, 32, 39) */
   --mayab-white: #F8F7F6;
 }
+
+/* BARRA DE NAVEGACION */
 
 /* Navbar estilo Mayab */
 .navbar {
@@ -22,7 +30,7 @@
 /* Marca (logo / nombre) */
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: var(--mayab-gold) !important;
   letter-spacing: 1px;
 }
@@ -33,6 +41,7 @@
   margin: 0 0.4rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  font-size: 1.6rem; 
 }
 
 /* Hover elegante */
@@ -70,13 +79,6 @@ footer{
 
 }
 
-/* #elementos_footer {
-    display: flex;
-    justify-content: space-evenly; 
-    align-items: center;
-    gap: 1rem; 
-} */
-
 @media (max-width: 480px) {
     footer {
 
@@ -90,4 +92,100 @@ footer{
     margin-left: 5rem;
     margin-right: 5rem;
     padding: 0.5rem;
+}
+
+.footer-icon svg{
+  width: 3rem;
+  height: 3rem;
+}
+
+.footer-text{
+  font-size: 1.1rem;
+}
+
+
+/* #################  INDEX ################# */
+
+.hero-mayab {
+  position: relative;
+
+  background-image: url("/images/sala_mayab.jpg");
+  background-repeat: no-repeat;
+  
+  min-height: 85vh;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-mayab::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.hero-mayab-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    background-color:#F8F7F680;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    
+}
+
+
+.collection-card {
+transition: transform 0.25s ease;
+}
+
+.collection-card:hover {
+transform: translateY(-4px);
+}
+
+.collection-card img {
+width: 100%;
+height: 320px;
+object-fit: cover;
+}
+
+@media (max-width: 576px) {
+
+.collection-card img {
+    height: 260px;
+}
+
+}
+
+/* ################# PRODUCT DETAIL ################# */
+
+.product-gallery {
+    max-width: 65rem;
+    margin: 0 auto;
+}
+
+.product-gallery figure {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.product-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.product-no-image {
+    height: 500px;
+    background-color: #f5f4f2;
 }
