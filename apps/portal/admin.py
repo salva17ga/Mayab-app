@@ -222,10 +222,11 @@ class FotoAdmin(admin.ModelAdmin):
             return type_of_product
         else: 
             return None
-        
+
 admin.site.register(Mueble, MuebleAdmin)
 admin.site.register(Decoracion, DecoracionAdmin)
 admin.site.register(Arte, ArteAdmin)
 admin.site.register(Exhibicion, ExhibicionAdmin)
 admin.site.register(Interiorismo, InteriorismoAdmin)
 admin.site.register(Foto, FotoAdmin)
+
