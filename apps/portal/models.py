@@ -2,40 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-# class Usuario(models.Model): 
-#     """Usuarios de mayab app que inician sesion"""
-
-#     class Tipos_usuario(models.TextChoices): 
-#         """Categorias validas para el atributo Tipo_usuario"""
-#         Administrador = "Administrador", "Administrador"
-#         Empleado = "Empleado", "Empleado"
-
-#     Nombre = models.CharField(max_length=50,
-#                               help_text="Nombre del usuario")
-#     Apellido_paterno = models.CharField(max_length=50,
-#                                         help_text="Apellido paterno del usuario")
-#     Apellido_materno = models.CharField(max_length=50,
-#                                         help_text="Apellido materno del usuario")
-#     Contrasena = models.CharField(verbose_name="Contraseña",
-#                                         max_length=50,
-#                                         help_text="Contraseña del usuario")
-#     Email = models.EmailField(verbose_name="Correo electrónico", 
-#                                         help_text="Correo electrónico del usuario", 
-#                                         unique = True)
-#     Fecha_registro = models.DateField(auto_now_add=True,
-#                                         verbose_name="Fecha de registro del usuario",
-#                                         help_text="Fecha  de registro del usuario")
-#     Tipo_usuario = models.CharField(verbose_name="Tipo de usuario",
-#                                     choices=Tipos_usuario.choices,
-#                                     max_length=20)
-#     Activo = models.BooleanField(default=True) 
-
-#     ### relations
-#     Registrado_por = models.IntegerField(null=True) # ID de usuario que creó al usuario
-
-#     # productos
-#     # exhibiciones
-
 #### relaciones de modelos 
 # usuarios - muebles (1 - n)
 # usuarios - arte (1 - n)
@@ -50,11 +16,15 @@ from django.contrib.auth.models import User
 # exhibiciones - fotos (1 - n)
 
 
-
 class Mueble(models.Model): 
     """
     Datos asociados a cada registro de mueble
     """
+
+    class Meta:
+        '''Nombres en español para ser mostrados en django admin'''
+        verbose_name = "Mueble"
+        verbose_name_plural = "Muebles"
 
     class CategoriasMuebles(models.TextChoices):
         """Categorías válidas para muebles registrados en el atributo Categoria"""
@@ -108,6 +78,10 @@ class Decoracion(models.Model):
     """
     Datos asociados a cada registro de accesorio de decoracion
     """
+    class Meta:
+            '''Nombres en español para ser mostrados en django admin'''
+            verbose_name = "Accesorio de decoración"
+            verbose_name_plural = "Accesorios de decoración"
 
     class CategoriasDecoracion(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
@@ -158,6 +132,10 @@ class Arte(models.Model):
     """
     Datos asociados a cada registro de accesorio de decoracion
     """
+    class Meta:
+            '''Nombres en español para ser mostrados en django admin'''
+            verbose_name = "Arte"
+            verbose_name_plural = "Arte"
 
     class CategoriasArte(models.TextChoices):
         """Categorías válidas para articulos registrados en el atributo Categoria"""
@@ -201,6 +179,11 @@ class Arte(models.Model):
 
 class Exhibicion(models.Model): 
     """Datos asociados a exhiciones realizadas en mayab"""
+    class Meta:
+            '''Nombres en español para ser mostrados en django admin'''
+            verbose_name = "Exhibición"
+            verbose_name_plural = "Exhibiciones"
+
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre de la exhibición", 
                               help_text="Nombre de la exhibición")
@@ -225,6 +208,11 @@ class Exhibicion(models.Model):
 
 class Interiorismo(models.Model): 
     '''Datos asociados a fotografias de diseño de espacios'''
+    class Meta:
+            '''Nombres en español para ser mostrados en django admin'''
+            verbose_name = "Interiorismo"
+            verbose_name_plural = "Interiorismo"
+
     Nombre = models.CharField(max_length=100,
                                   verbose_name="Nombre del diseño", 
                                   help_text="Nombre del diseño")
@@ -260,6 +248,11 @@ def ruta_foto(instance, filename):
     
 class Foto(models.Model): 
     """Datos asociados a imagenes cargadas en el sistema de cualquier entidad"""
+
+    class Meta:
+            '''Nombres en español para ser mostrados en django admin'''
+            verbose_name = "Foto"
+            verbose_name_plural = "Fotos"
 
     Imagen = models.ImageField(upload_to=ruta_foto)
     Fecha_carga = models.DateField(auto_now_add=True,
@@ -306,7 +299,16 @@ class Foto(models.Model):
             raise ValidationError("Seleccione únicamente un producto o una exhibición.")
          
     def __str__(self):
-        if self.Imagen:
+        if self.Mueble:
             return f"Foto de {self.Mueble} - {self.Imagen.name}"
-        return f"Foto de {self.Mueble} - Sin imagen"
+        elif self.Decoracion: 
+             return f"Foto de {self.Decoracion} - {self.Imagen.name}"
+        elif self.Arte: 
+                     return f"Foto de {self.Arte} - {self.Imagen.name}"
+        elif self.Decoracion: 
+                     return f"Foto de {self.Decoracion} - {self.Imagen.name}"
+        elif self.Interiorismo: 
+                             return f"Foto de {self.Interiorismo} - {self.Imagen.name}"
+        
+        return f"Registro sin imagen"
 

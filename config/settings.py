@@ -146,3 +146,7 @@ TASKS = {
                    "ImmediateBackend"
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    "config.backends.EmailBackend",
+]
