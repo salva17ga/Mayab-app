@@ -295,7 +295,7 @@ class Foto(models.Model):
         '''validar que solo hay una relacion forgeign key en la imagen'''
         super().clean()
         if bool(self.Mueble) + bool(self.Decoracion) + bool(self.Arte) + \
-            bool(self.Exhibicion) + bool( self.Interiorismo) > 1: 
+            bool(self.Exhibicion) + bool( self.Interiorismo) != 1: 
             raise ValidationError("Seleccione únicamente un producto o una exhibición.")
          
     def __str__(self):
@@ -305,8 +305,8 @@ class Foto(models.Model):
              return f"Foto de {self.Decoracion} - {self.Imagen.name}"
         elif self.Arte: 
                      return f"Foto de {self.Arte} - {self.Imagen.name}"
-        elif self.Decoracion: 
-                     return f"Foto de {self.Decoracion} - {self.Imagen.name}"
+        elif self.Exhibicion: 
+                     return f"Foto de {self.Exhibicion} - {self.Imagen.name}"
         elif self.Interiorismo: 
                              return f"Foto de {self.Interiorismo} - {self.Imagen.name}"
         
