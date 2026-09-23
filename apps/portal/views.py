@@ -114,4 +114,3 @@ def product_detail(request, tipo, id):
     )
 
 
-### TODO: error handling routes 

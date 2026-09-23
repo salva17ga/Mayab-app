@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Error en servidor{% endblock %}
+
+{% block content %}
+
+    <div class="container vh-100 d-flex
+                justify-content-center align-items-center">
+
+        <div class="text-center">
+
+            <h1 class="display-1 fw-bold">error 500</h1>
+
+            <h2>Error en servidor</h2>
+
+            <p class="text-muted">
+                Lo sentimos, ha ocurrido un error inesperado. Por favor, vuelve a 
+                intentarlo más tarde. 
+            </p>
+
+            <a href="{% url 'portal:index' %}"
+               class="btn btn-dark">
+                Volver al inicio
+            </a>
+
+        </div>
+
+    </div>+
+    
+{% endblock %}
