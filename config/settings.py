@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+# environment mode (development or production)
+ENVIRONMENT_MODE = config('ENVIRONMENT_MODE')
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ln5*0%+v2%=r=is3cu(db3vp+95l$mb3t(q@!py1^$mhw(#r%y'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if ENVIRONMENT_MODE == "development" else False 
 
-ALLOWED_HOSTS = []
+if ENVIRONMENT_MODE == 'production': 
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', Csv())
+elif ENVIRONMENT_MODE == 'development': 
+    ALLOWED_HOSTS = []
 
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS",
+    cast=Csv()
+)
 
 # Application definition
 
@@ -43,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise helper for static files in production mode
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,14 +86,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if ENVIRONMENT_MODE == 'production':
+    DATABASES = {
+            'default': {
+                'ENGINE': config('ENGINE'),
+                'NAME': config('NAME'),
+                'USER': config('USER'),
+                'PASSWORD':  config('PASSWORD'),
+                'HOST': config('HOST'), 
+                'PORT': config('PORT'),
+            }
+        }
+    CONN_MAX_AGE = 600 # 600 seconds 
+    CONN_HEALTH_CHECKS = True
+    
+else:  
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
-
+    
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -105,10 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = "America/Mexico_City"
 USE_I18N = True
 
 USE_TZ = True
@@ -117,15 +141,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [BASE_DIR/'static']
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Media files (uploaded images, pdfs, etc)
 
 MEDIA_ROOT = BASE_DIR / "media"
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 
 # mail configurations
 
@@ -147,6 +172,21 @@ TASKS = {
     }
 }
 
+# Custom backends
 AUTHENTICATION_BACKENDS = [
     "config.backends.EmailBackend",
+]
+
+# HTTPS 
+CSRF_COOKIE_SECURE = True if ENVIRONMENT_MODE == 'production' else False
+SESSION_COOKIE_SECURE = True if ENVIRONMENT_MODE == 'production' else False
+SECURE_SSL_REDIRECT  = True if ENVIRONMENT_MODE == 'production' else False
+
+# admins to contact in case of a 500 error
+ADMINS = [
+    ("Salvador", "salvador.garcilita@bioalgoritmia.com"),
+]
+# managers to contact in case of a broken link
+MANAGERS = [
+    ("Salvador", "salvador.garcilita@bioalgoritmia.com"),
 ]

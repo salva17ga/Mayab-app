@@ -1,8 +1,27 @@
 # secrets needed in Mayab app
 
+# environment mode (development or production)
+ENVIRONMENT_MODE = production
+
+# a list of allowed hosts
+ALLOWED_HOSTS = a.site, b.site
+
+# email configs
 EMAIL_HOST = 'smtp.xxx.com'
 EMAIL_HOST_USER = xxx
 EMAIL_HOST_PASSWORD = xxx
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+# settings configs
+SECRET_KEY = a_secret_key
+CSRF_TRUSTED_ORIGINS=https://mayab.com,https://www.mayab.com
+
+# database 
+ENGINE =
+NAME =
+USER =
+PASSWORD =
+HOST = 
+PORT = 
