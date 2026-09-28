@@ -181,6 +181,7 @@ AUTHENTICATION_BACKENDS = [
 CSRF_COOKIE_SECURE = True if ENVIRONMENT_MODE == 'production' else False
 SESSION_COOKIE_SECURE = True if ENVIRONMENT_MODE == 'production' else False
 SECURE_SSL_REDIRECT  = True if ENVIRONMENT_MODE == 'production' else False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # admins to contact in case of a 500 error
 ADMINS = [
