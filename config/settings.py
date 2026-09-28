@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 if ENVIRONMENT_MODE == 'production':
     DATABASES = {
             'default': {
-                'ENGINE': config('ENGINE'),
-                'NAME': config('NAME'),
-                'USER': config('USER'),
-                'PASSWORD':  config('PASSWORD'),
-                'HOST': config('HOST'), 
-                'PORT': config('PORT'),
+                'ENGINE': config('ENGINE_DB'),
+                'NAME': config('NAME_DB'),
+                'USER': config('USER_DB'),
+                'PASSWORD':  config('PASSWORD_DB'),
+                'HOST': config('HOST_DB'), 
+                'PORT': config('PORT_DB'),
             }
         }
     CONN_MAX_AGE = 600 # 600 seconds 
