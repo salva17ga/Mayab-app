@@ -20,3 +20,4 @@ plan.txt
 
 # media files (saved by users)
 media/*
+!media/.gitkeep
