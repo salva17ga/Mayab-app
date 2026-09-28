@@ -29,9 +29,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if ENVIRONMENT_MODE == "development" else False 
 
-if ENVIRONMENT_MODE == 'production': 
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', Csv())
-elif ENVIRONMENT_MODE == 'development': 
+if ENVIRONMENT_MODE == 'production':
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+elif ENVIRONMENT_MODE == 'development':
     ALLOWED_HOSTS = []
 
 CSRF_TRUSTED_ORIGINS = config(
