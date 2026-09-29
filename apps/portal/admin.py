@@ -24,14 +24,19 @@ class BaseProductAdmin(admin.ModelAdmin):
         register of a product and saving a first image in that form using the 
         inline approach. This results in that first image saved with their 
         corresponding register having a 'Registrado_por' valid input.  
+        Also deletes objects marked for deletion in the admin. 
         '''
         instances = formset.save(commit=False)
-
+        # Save remaining/new objects
         for obj in instances:
             if not obj.Registrado_por:
                 obj.Registrado_por = request.user
 
             obj.save()
+
+        # Delete objects marked for deletion
+        for obj in formset.deleted_objects:
+            obj.delete()
 
         formset.save_m2m()
 

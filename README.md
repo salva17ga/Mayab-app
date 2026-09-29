@@ -13,6 +13,8 @@ Aplicación monolítica, debido a su pequeño tamaño todas las rutas y funciona
 
 Versiones: 
 - 1.0.0: desplegada el 27/9/2026
+- 1.0.1: corrección de motor de autenticación que no permitía que usuarios vieran las posibles acciones correspondientes a su grupo en el admin tras iniciar sesión. | corrección de formulario que mostraba las fotos de cada producto para que si eliminara los registros y los archivos. 
+
 
 ## Contacto: 
 Desarrollada por Salvador Garcilita, salvador.garcilita@bioalgoritmia.com

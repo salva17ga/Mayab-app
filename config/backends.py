@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.backends import ModelBackend
 
 ### custom backends coded for this app. 
 
-class EmailBackend(BaseBackend):
+class EmailBackend(ModelBackend):
 
     '''
     This class is a custom authentication backend, enabling login for admin site users
