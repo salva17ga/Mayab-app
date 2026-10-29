@@ -21,6 +21,26 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 
+#imports for sitemap (google indexing):
+from django.contrib.sitemaps.views import sitemap
+from django.http import HttpResponse
+from django.urls import path
+from .sitemaps import StaticSitemap
+
+#generation of views for sitemap and robots.txt (for google indexing)
+sitemaps = {
+    "static": StaticSitemap,
+}
+
+def robots_txt(request):
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Sitemap: https://mayabsma.com/sitemap.xml\n"
+    )
+    return HttpResponse(content, content_type="text/plain")
+
+#project urls collection:
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', apps.portal.views.index, name = 'index'), 
@@ -63,6 +83,15 @@ urlpatterns = [
             template_name="registration/password_reset_complete.html",
         ),
         name="password_reset_complete",
+    ),
+
+    #urls for sitemap (google indexing)
+    path("robots.txt", robots_txt, name="robots_txt"),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
     ),
 ]
 
