@@ -40,7 +40,8 @@ class Mueble(models.Model):
         Cabecera_cama = 'cabecera_cama', 'Cabeceras de cama'
         Escritorio = 'escritorio', 'Escritorios'
         Librero = 'librero', 'Libreros'
-        Antiguedad = 'Antigüedad', 'Antigüedades'
+        Antiguedad = 'antigüedad', 'Antigüedades'
+        Buro = 'buró', 'Burós'
 
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre del mueble", 
@@ -95,6 +96,8 @@ class Decoracion(models.Model):
         Tapete = 'tapete', 'Tapetes'
         Cojin = 'cojin', 'Cojines'
         Madera_tallada = 'madera_tallada', 'Madera tallada (ebanistería)'
+        Vela = 'Vela', 'Velas'
+        Tabla_quesos = 'Tabla de quesos', 'Tablas de quesos'
 
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre del accesorio", 
