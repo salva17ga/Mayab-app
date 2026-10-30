@@ -9,7 +9,8 @@
   <!-- SEO: Title and description -->
   <title>{% block title %}Mayab | Muebles, Arte y Decoración en San Miguel de Allende{% endblock %}</title>
 
-  <meta name="description" content="{% block meta_description %}Mayab es un espacio dedicado a los muebles, arte y decoración. Descubre nuestra selección de piezas y propuestas de interiorismo en San Miguel de Allende, Guanajuato.{% endblock %}">
+  <meta name="description"
+    content="{% block meta_description %}Mayab es un espacio dedicado a los muebles, arte y decoración. Descubre nuestra selección de piezas y propuestas de interiorismo en San Miguel de Allende, Guanajuato.{% endblock %}">
 
   <meta name="robots" content="index, follow">
 
@@ -22,7 +23,8 @@
   <meta property="og:site_name" content="Mayab">
 
   <meta property="og:title" content="{% block og_title %}Mayab | Muebles, Arte y Decoración{% endblock %}">
-  <meta property="og:description" content="{% block og_description %}Descubre Mayab: muebles, arte, decoración e interiorismo en San Miguel de Allende, Guanajuato.{% endblock %}">
+  <meta property="og:description"
+    content="{% block og_description %}Descubre Mayab: muebles, arte, decoración e interiorismo en San Miguel de Allende, Guanajuato.{% endblock %}">
 
   <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
 
@@ -34,16 +36,17 @@
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% block twitter_title %}Mayab | Muebles, Arte y Decoración{% endblock %}">
-  <meta name="twitter:description" content="{% block twitter_description %}Descubre muebles, arte, decoración e interiorismo en Mayab, San Miguel de Allende.{% endblock %}">
-  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/mayab-logo.png' %}">
+  <meta name="twitter:description"
+    content="{% block twitter_description %}Descubre muebles, arte, decoración e interiorismo en Mayab, San Miguel de Allende.{% endblock %}">
+  <meta name="twitter:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo_mayab.png' %}">
 
   <!-- Favicon (optional) -->
   <link rel="icon" type="image/png" href="{% static 'images/logo_mayab.png' %}">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIlkxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-    crossorigin="anonymous">
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'styles.css' %}">
