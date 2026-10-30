@@ -25,11 +25,19 @@ from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
 from django.http import HttpResponse
 from django.urls import path
-from .sitemaps import StaticSitemap
+from .sitemaps import (
+    StaticSitemap,
+    MuebleSitemap,
+    ArteSitemap,
+    DecoracionSitemap,
+)
 
 #generation of views for sitemap and robots.txt (for google indexing)
 sitemaps = {
     "static": StaticSitemap,
+    "muebles": MuebleSitemap,
+    "arte": ArteSitemap,
+    "decoracion": DecoracionSitemap,
 }
 
 def robots_txt(request):
