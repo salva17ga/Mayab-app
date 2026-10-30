@@ -39,6 +39,8 @@ class Mueble(models.Model):
         Vitrina = 'vitrina', 'Vitrinas'
         Cabecera_cama = 'cabecera_cama', 'Cabeceras de cama'
         Escritorio = 'escritorio', 'Escritorios'
+        Librero = 'librero', 'Libreros'
+        Antiguedad = 'Antigüedad', 'Antigüedades'
 
     Nombre = models.CharField(max_length=100,
                               verbose_name="Nombre del mueble", 
@@ -69,7 +71,6 @@ class Mueble(models.Model):
                                             null=True,
                                             blank=True,
                                             related_name='muebles_registrados')
-
 
     def __str__(self):
         return self.Nombre
